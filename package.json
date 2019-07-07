@@ -4,6 +4,8 @@
 	"description": "detect visibility of DOM Elements",
 	"main": "index.js",
 	"scripts": {
+		"start": "webpack --watch",
+		"build": "webpack",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
@@ -18,5 +20,16 @@
 	"bugs": {
 		"url": "https://github.com/anubhavsrivastava/perceptible/issues"
 	},
-	"homepage": "https://github.com/anubhavsrivastava/perceptible#readme"
+	"homepage": "https://github.com/anubhavsrivastava/perceptible#readme",
+	"devDependencies": {
+		"@babel/cli": "^7.5.0",
+		"@babel/core": "^7.5.0",
+		"@babel/preset-env": "^7.5.0",
+		"webpack": "^4.35.2",
+		"webpack-cli": "^3.3.5",
+		"webpack-dev-server": "^3.7.2"
+	},
+	"dependencies": {
+		"babel-loader": "^8.0.6"
+	}
 }
