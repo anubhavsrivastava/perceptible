@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ad Detection</title>
+		<style>
+			body {
+				height: 2000px;
+				width: 2500px;
+			}
+			#ad {
+				width: 300px;
+				height: 250px;
+				background: #ee7202;
+				position: relative;
+				left: 100px;
+				top: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="ad">
+			ADVERTISEMENT
+		</div>
+	</body>
+	<script src="..\dist\bundle.js"></script>
+	<script>
+		function printStatus() {
+			if (typeof window.log === 'function') {
+				window.log();
+			}
+
+			setTimeout(printStatus, 500);
+		}
+
+		printStatus();
+	</script>
+</html>
