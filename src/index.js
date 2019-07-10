@@ -2,9 +2,7 @@ var adIsViewable = true,
 	viewabilityTime = 0,
 	adElement = document.getElementById('ad');
 
-window.log = function() {
-	console.log('Ads is viewable: ', adIsViewable, '\nViewability time of the ad in sec:', viewabilityTime);
-};
+import reporter from './reporters/consoleLogger';
 
 class Perceptor {
 	constructor(selector, options = {}) {
@@ -13,7 +11,7 @@ class Perceptor {
 	}
 
 	watch() {
-		setTimeout(window.log, 500);
+		setTimeout(reporter, 500, { adIsViewable, viewabilityTime });
 	}
 }
 
