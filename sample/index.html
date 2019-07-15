@@ -7,7 +7,8 @@
 				height: 2000px;
 				width: 2500px;
 			}
-			#ad {
+			#ad,
+			#ad2 {
 				width: 300px;
 				height: 250px;
 				background: #ee7202;
@@ -15,10 +16,19 @@
 				left: 100px;
 				top: 100px;
 			}
+			#ad2 {
+				left: 500px;
+			}
 		</style>
 	</head>
 	<body>
 		<div id="ad">
+			ADVERTISEMENT
+		</div>
+		<div id="fad" style="height:600px;">
+			space
+		</div>
+		<div id="ad2">
 			ADVERTISEMENT
 		</div>
 	</body>
@@ -31,7 +41,7 @@
 
 			setTimeout(printStatus, 500);
 		}
-		let t = new Perceptor('a');
+		let t = new Perceptor(document.querySelector('#ad2'));
 		t.watch();
 		// printStatus();
 	</script>

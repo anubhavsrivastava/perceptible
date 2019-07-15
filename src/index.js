@@ -2,17 +2,27 @@ var adIsViewable = true,
 	viewabilityTime = 0,
 	adElement = document.getElementById('ad');
 
-import reporter from './reporters/consoleLogger';
+import reporter from './reporters/domReporter';
+import { isBoxed, getElementPosition, getCurrentViewportElementPosition, getCurrentScrollPosition, getCurrentViewport } from './view';
 
 class Perceptor {
-	constructor(selector, options = {}) {
-		this._selector = selector;
+	constructor(DOMElement, options = {}) {
+		this._ele = DOMElement;
 		this._options = options;
 	}
 
 	watch() {
-		setTimeout(reporter, 500, { adIsViewable, viewabilityTime });
+		this.handleId = setInterval(() => {
+			let ele = getCurrentViewportElementPosition(this._ele);
+			let view = getCurrentViewport();
+			return reporter({ has: isBoxed(view, ele), a: ele, viewBox: view });
+		}, 1000);
+	}
+
+	unwatch() {
+		clearInterval(this.handleId);
 	}
 }
+Perceptor.getCurrentScrollPosition = getCurrentScrollPosition;
 
 window.Perceptor = Perceptor;
