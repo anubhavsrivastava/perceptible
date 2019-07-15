@@ -2,7 +2,7 @@
 	"name": "perceptible",
 	"version": "0.0.1",
 	"description": "detect visibility of DOM Elements",
-	"main": "index.js",
+	"main": "dist/bundle.js",
 	"scripts": {
 		"start": "webpack --watch",
 		"build": "webpack",
