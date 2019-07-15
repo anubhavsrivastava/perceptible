@@ -1,9 +1,9 @@
-var adIsViewable = true,
-	viewabilityTime = 0,
-	adElement = document.getElementById('ad');
+// var adIsViewable = true,
+// 	viewabilityTime = 0,
+// 	adElement = document.getElementById('ad');
 
 import reporter from './reporters/domReporter';
-import { isBoxed, getElementPosition, getCurrentViewportElementPosition, getCurrentScrollPosition, getCurrentViewport } from './view';
+import { isBoxed, getCurrentViewportElementPosition, getCurrentScrollPosition, getCurrentViewport } from './view';
 
 class Perceptor {
 	constructor(DOMElement, options = {}) {
