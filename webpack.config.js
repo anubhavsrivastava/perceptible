@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // Imports
 const path = require('path');
 // Webpack Configuration
@@ -10,7 +11,11 @@ const config = {
 	// Output
 	output: {
 		path: path.resolve(__dirname, './dist'),
-		filename: 'bundle.js'
+		filename: 'bundle.js',
+		library: 'Perceptor',
+		libraryTarget: 'umd',
+		libraryExport: 'default',
+		umdNamedDefine: true
 	},
 	// Loaders
 	module: {
