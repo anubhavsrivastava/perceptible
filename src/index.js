@@ -1,23 +1,28 @@
-/************************************************************************************************
- *                                                                                              *
- *                              VARIABLES DECLARATION                                           *
- *                                                                                              *
- ************************************************************************************************/
 var adIsViewable = true,
 	viewabilityTime = 0,
 	adElement = document.getElementById('ad');
 
-/**
- * Logs the viewability values in the console
- *
- * @override
- */
-window.log = function() {
-	console.log('Ads is viewable: ', adIsViewable, '\nViewability time of the ad in sec:', viewabilityTime);
-};
+import reporter from './reporters/domReporter';
+import { isBoxed, getElementPosition, getCurrentViewportElementPosition, getCurrentScrollPosition, getCurrentViewport } from './view';
 
-/************************************************************************************************
- *                                                                                              *
- *                              YOUR IMPLEMENTATION                                             *
- *                                                                                              *
- ************************************************************************************************/
+class Perceptor {
+	constructor(DOMElement, options = {}) {
+		this._ele = DOMElement;
+		this._options = options;
+	}
+
+	watch() {
+		this.handleId = setInterval(() => {
+			let ele = getCurrentViewportElementPosition(this._ele);
+			let view = getCurrentViewport();
+			return reporter({ has: isBoxed(view, ele), a: ele, viewBox: view });
+		}, 1000);
+	}
+
+	unwatch() {
+		clearInterval(this.handleId);
+	}
+}
+Perceptor.getCurrentScrollPosition = getCurrentScrollPosition;
+
+window.Perceptor = Perceptor;
