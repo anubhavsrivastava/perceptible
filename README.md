@@ -1,3 +1,3 @@
 # perceptible
 
-A basic implementation to detect visibility of DOM Elements
+A basic implementation to detect viewability of DOM Elements
