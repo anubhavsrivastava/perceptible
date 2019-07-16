@@ -1,19 +1,18 @@
 import defaultConfig from './defaultConfig';
 import * as reporters from './reporters';
 
-import { isBoxed, getCurrentViewportElementPosition, getCurrentViewport } from './view';
+import getDefaultSpectators from './spectators';
 
 class Perceptor {
 	constructor(DOMElement, options = {}) {
 		this.element = DOMElement;
+		this.spectators = getDefaultSpectators();
 		this.config = Object.assign({}, defaultConfig, Perceptor.defaults, options);
 	}
 
 	watch() {
 		this.handleId = setInterval(() => {
-			let ele = getCurrentViewportElementPosition(this.element);
-			let view = getCurrentViewport();
-			return this.config.reporter(this, { has: isBoxed(view, ele), a: ele, viewBox: view });
+			return this.config.reporter(this, { ...this.spectators.run(this) });
 		}, 1000);
 	}
 
