@@ -1,21 +1,19 @@
-// var adIsViewable = true,
-// 	viewabilityTime = 0,
-// 	adElement = document.getElementById('ad');
+import defaultConfig from './defaultConfig';
+import * as reporters from './reporters';
 
-import reporter from './reporters/domReporter';
-import { isBoxed, getCurrentViewportElementPosition, getCurrentScrollPosition, getCurrentViewport } from './view';
+import { isBoxed, getCurrentViewportElementPosition, getCurrentViewport } from './view';
 
 class Perceptor {
 	constructor(DOMElement, options = {}) {
-		this._ele = DOMElement;
-		this._options = options;
+		this.element = DOMElement;
+		this.config = Object.assign({}, defaultConfig, Perceptor.defaults, options);
 	}
 
 	watch() {
 		this.handleId = setInterval(() => {
-			let ele = getCurrentViewportElementPosition(this._ele);
+			let ele = getCurrentViewportElementPosition(this.element);
 			let view = getCurrentViewport();
-			return reporter({ has: isBoxed(view, ele), a: ele, viewBox: view });
+			return this.config.reporter(this, { has: isBoxed(view, ele), a: ele, viewBox: view });
 		}, 1000);
 	}
 
@@ -23,6 +21,8 @@ class Perceptor {
 		clearInterval(this.handleId);
 	}
 }
-Perceptor.getCurrentScrollPosition = getCurrentScrollPosition;
 
-window.Perceptor = Perceptor;
+Perceptor.defaults = Object.assign({}, defaultConfig);
+Perceptor.reporters = reporters;
+
+export default Perceptor;

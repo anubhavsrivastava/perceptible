@@ -14,6 +14,6 @@ var paintObjectOnContainer = function(o) {
 	return `<pre>${JSON.stringify(o, undefined, 4)}</pre>`;
 };
 
-export default context => {
+export default (perceptorInstance, context) => {
 	mainContainer.innerHTML = paintObjectOnContainer(context);
 };

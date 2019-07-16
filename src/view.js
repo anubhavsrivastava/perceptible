@@ -20,9 +20,30 @@ export const getCurrentViewportElementPosition = function(node) {
 	return { left: position.left + scrollPos.left, top: position.top + scrollPos.top, height: position.height, width: position.width };
 };
 
-export const isBoxed = function(container, node) {
-	const inHeightView = node.top > container.top && node.top + node.height < container.top + container.height;
-	const inWidthView = node.left > container.left && node.left + node.width < container.left + container.width;
+const hasIntersectingArea = (lc, rc, tc, bc) => {
+	return (lc && tc) || (lc && bc) || (rc && tc) || (rc && bc);
+};
 
-	return { inHeightView, inWidthView };
+export const isBoxed = function(container, node) {
+	const nodeRight = node.left + node.width;
+	const containerRight = container.left + container.width;
+	const nodeBottom = node.top + node.height;
+	const containerBottom = container.top + container.height;
+
+	const leftCoordinates = node.left >= container.left && node.left <= containerRight;
+	const rightCoordinates = nodeRight <= containerRight && nodeRight >= container.left;
+	const topCoordinates = node.top >= container.top && node.top <= containerBottom;
+	const bottomCoordinates = nodeBottom <= containerBottom && nodeBottom > container.top;
+
+	const subView = {};
+
+	if (hasIntersectingArea(leftCoordinates, rightCoordinates, topCoordinates, bottomCoordinates)) {
+		subView.left = leftCoordinates ? node.left : container.left;
+		subView.right = rightCoordinates ? nodeRight : containerRight;
+		subView.top = topCoordinates ? node.top : container.top;
+		subView.bottom = bottomCoordinates ? nodeBottom : containerBottom;
+		subView.surface = ((((subView.right - subView.left) / node.width) * (subView.bottom - subView.top)) / node.height) * 100;
+	}
+
+	return { leftCoordinates, rightCoordinates, topCoordinates, bottomCoordinates, subView };
 };
