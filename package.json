@@ -6,6 +6,7 @@
 	"scripts": {
 		"start": "webpack --watch",
 		"build": "webpack",
+		"sample": "npx http-server -o",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
@@ -25,11 +26,10 @@
 		"@babel/cli": "^7.5.0",
 		"@babel/core": "^7.5.0",
 		"@babel/preset-env": "^7.5.0",
+		"http-server": "^0.11.1",
 		"webpack": "^4.35.2",
 		"webpack-cli": "^3.3.5",
-		"webpack-dev-server": "^3.7.2"
-	},
-	"dependencies": {
+		"webpack-dev-server": "^3.7.2",
 		"babel-loader": "^8.0.6"
 	}
 }
