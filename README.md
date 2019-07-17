@@ -18,4 +18,5 @@ Todo list:
 
 -   [x] Framework with default Spectators
 -   [ ] Documentation
--   [ ] Test Cases
+-   [ ] Unit Test Cases
+-   [ ] Puppeteer Browser test
