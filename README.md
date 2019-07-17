@@ -13,3 +13,9 @@
 A basic implementation to detect visibility of DOM Elements
 
 View the sample using `npm run sample`
+
+Todo list:
+
+-   [x] Framework with default Spectators
+-   [ ] Documentation
+-   [ ] Test Cases

@@ -7,10 +7,11 @@ const hasIntersectingArea = (lc, rc, tc, bc) => {
 export default function viewPortSpectator(context) {
 	let ele = getCurrentViewportElementPosition(context.element);
 	let view = getCurrentViewport();
-	return isBoxed(view, ele);
+	return isBoxed(view, ele, context.config);
 }
 
-export const isBoxed = function(container, node) {
+export const isBoxed = function(container, node, config) {
+	const threshold = config && config['threshold'] !== undefined ? config.threshold : 100;
 	const nodeRight = node.left + node.width;
 	const containerRight = container.left + container.width;
 	const nodeBottom = node.top + node.height;
@@ -31,5 +32,5 @@ export const isBoxed = function(container, node) {
 		subView.surface = ((((subView.right - subView.left) / node.width) * (subView.bottom - subView.top)) / node.height) * 100;
 	}
 
-	return { subView };
+	return { isVisible: subView.surface >= threshold, subView };
 };

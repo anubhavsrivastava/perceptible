@@ -6,6 +6,7 @@ import getDefaultSpectators from './spectators';
 class Perceptor {
 	constructor(DOMElement, options = {}) {
 		this.element = DOMElement;
+		this.n = 'anubhav';
 		this.spectators = getDefaultSpectators();
 		this.config = Object.assign({}, defaultConfig, Perceptor.defaults, options);
 	}
