@@ -1,5 +1,5 @@
 //eslint-disable-next-line
-import { consoleReporter, DOMReporter } from './reporters';
+import { DOMSubscriber, consoleSubscriber } from './subscribers';
 
 const config = {
 	//
@@ -10,7 +10,7 @@ const config = {
 	threshold: 100,
 	watchMode: 'interval', // interval, scroll, raf
 	watchInterval: 1000, // ms of interval time
-	reporter: DOMReporter
+	reporter: DOMSubscriber
 };
 
 export default config;

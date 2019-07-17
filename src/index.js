@@ -1,5 +1,5 @@
 import defaultConfig from './defaultConfig';
-import * as reporters from './reporters';
+import * as subscribers from './subscribers';
 
 import getDefaultSpectators from './spectators';
 
@@ -13,7 +13,7 @@ class Perceptor {
 	watch() {
 		this.handleId = setInterval(() => {
 			return this.config.reporter(this, { ...this.spectators.run(this) });
-		}, 1000);
+		}, 500);
 	}
 
 	unwatch() {
@@ -22,6 +22,6 @@ class Perceptor {
 }
 
 Perceptor.defaults = Object.assign({}, defaultConfig);
-Perceptor.reporters = reporters;
+Perceptor.subscribers = subscribers;
 
 export default Perceptor;
