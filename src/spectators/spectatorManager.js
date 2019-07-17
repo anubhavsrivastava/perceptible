@@ -1,7 +1,7 @@
 export default class SpectatorManager {
 	constructor() {
 		this.chain = [];
-		this.prevResult = { isVisible: false };
+		this.prevResult = {};
 	}
 
 	use(fn) {
@@ -19,6 +19,7 @@ export default class SpectatorManager {
 	run(perceptorContext) {
 		const updatedResult = this.chain.reduce((currentResult, spectator) => {
 			if (spectator) {
+				//todo check result is an object
 				currentResult = Object.assign(currentResult, spectator(perceptorContext, currentResult, this.prevResult));
 			}
 			return currentResult;

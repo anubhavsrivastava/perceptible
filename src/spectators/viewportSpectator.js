@@ -31,5 +31,5 @@ export const isBoxed = function(container, node) {
 		subView.surface = ((((subView.right - subView.left) / node.width) * (subView.bottom - subView.top)) / node.height) * 100;
 	}
 
-	return { leftCoordinates, rightCoordinates, topCoordinates, bottomCoordinates, subView };
+	return { subView };
 };
