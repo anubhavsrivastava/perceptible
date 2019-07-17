@@ -23,7 +23,7 @@ export default class SpectatorManager {
 				currentResult = Object.assign(currentResult, spectator(perceptorContext, currentResult, this.prevResult));
 			}
 			return currentResult;
-		}, this.prevResult);
+		}, Object.assign({}, this.prevResult));
 		this.prevResult = updatedResult;
 		return updatedResult;
 	}
