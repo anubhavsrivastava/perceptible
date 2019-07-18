@@ -16,7 +16,7 @@ class Perceptor {
 	}
 
 	watch() {
-		this.scheduler = new IntervalScheduler({ context: this, subscriberChain: this.subscriberChain, spectatorChain: this.spectatorChain, interval: this.config.watchInterval });
+		this.scheduler = new IntervalScheduler({ context: this, subscriberChain: this.subscriberChain, spectatorChain: this.spectatorChain, interval: this.config.scheduler.interval });
 		this.element.addEventListener('click', this.event, false);
 	}
 

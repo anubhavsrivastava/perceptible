@@ -1,5 +1,5 @@
 const arrayMergeList = ['subscribers', 'spectators'];
-const objectMergeList = ['watch'];
+const objectMergeList = ['scheduler', 'viewOffset'];
 
 const isArray = candidate => {
 	return Array.isArray(candidate);

@@ -6,8 +6,19 @@ const config = {
 	// defaults to 100
 	threshold: 100,
 
-	watchMode: 'interval', // interval, scroll, raf
-	watchInterval: 500, // ms of interval time
+	// scheduler config
+	scheduler: {
+		mode: 'interval', // interval, scroll, raf, observer
+		// currently on interval is supported
+		interval: 500 // ms of interval time, applicable for only "interval" type of mode
+	},
+
+	viewOffset: {
+		top: 0, //px
+		left: 0, //px
+		right: 0, //px
+		bottom: 0 //px
+	},
 
 	subscribers: [],
 	spectators: [],

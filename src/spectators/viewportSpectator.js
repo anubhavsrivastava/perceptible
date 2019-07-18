@@ -12,22 +12,28 @@ export default function viewPortSpectator(context) {
 
 export const isBoxed = function(container, node, config) {
 	const threshold = config && config['threshold'] !== undefined ? config.threshold : 100;
-	const nodeRight = node.left + node.width;
-	const containerRight = container.left + container.width;
-	const nodeBottom = node.top + node.height;
-	const containerBottom = container.top + container.height;
+	// todo: validate viewOffset values
+	const { viewOffset = { top: 0, left: 0, right: 0, bottom: 0 } } = config;
 
-	const leftCoordinates = node.left >= container.left && node.left <= containerRight;
-	const rightCoordinates = nodeRight <= containerRight && nodeRight >= container.left;
-	const topCoordinates = node.top >= container.top && node.top <= containerBottom;
-	const bottomCoordinates = nodeBottom <= containerBottom && nodeBottom > container.top;
+	const nodeRight = node.left + node.width;
+	const nodeBottom = node.top + node.height;
+
+	const containerLeft = container.left + viewOffset.left;
+	const containerTop = container.top + viewOffset.top;
+	const containerRight = containerLeft + container.width - viewOffset.right;
+	const containerBottom = containerTop + container.height - viewOffset.bottom;
+
+	const leftCoordinates = node.left >= containerLeft && node.left <= containerRight;
+	const rightCoordinates = nodeRight <= containerRight && nodeRight >= containerLeft;
+	const topCoordinates = node.top >= containerTop && node.top <= containerBottom;
+	const bottomCoordinates = nodeBottom <= containerBottom && nodeBottom > containerTop;
 
 	const subView = {};
 
 	if (hasIntersectingArea(leftCoordinates, rightCoordinates, topCoordinates, bottomCoordinates)) {
-		subView.left = leftCoordinates ? node.left : container.left;
+		subView.left = leftCoordinates ? node.left : containerLeft;
 		subView.right = rightCoordinates ? nodeRight : containerRight;
-		subView.top = topCoordinates ? node.top : container.top;
+		subView.top = topCoordinates ? node.top : containerTop;
 		subView.bottom = bottomCoordinates ? nodeBottom : containerBottom;
 		subView.surface = ((((subView.right - subView.left) / node.width) * (subView.bottom - subView.top)) / node.height) * 100;
 	}
