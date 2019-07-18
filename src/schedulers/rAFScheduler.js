@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 //This scheduler will work on requestAnimationFrame
 
 export default class rAFEventScheduler {
