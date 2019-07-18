@@ -44,8 +44,8 @@
 		}
 		window.clickCount = 0;
 		let t = new Perceptor(document.querySelector('#ad2'), {
-			clickHandler: function() {
-				window.log(clickCount++);
+			clickHandler: function(e, f) {
+				window.log(e, f, clickCount++);
 			}
 		});
 		t.watch();

@@ -4,6 +4,7 @@ import domSubscriber from './subscribers/domSubscriber';
 import getDefaultSpectators from './spectators/defaultSpectators';
 import SpectatorManager from './spectators/spectatorManager';
 import SubscriberManager from './subscribers/subscriberManager';
+import IntervalScheduler from './schedulers/intervalScheduler';
 
 class Perceptor {
 	constructor(DOMElement, options = {}) {
@@ -11,25 +12,17 @@ class Perceptor {
 		this.config = mergeConfig(Object.assign({}, defaultConfig, Perceptor.defaults, { subscribers: [domSubscriber], spectators: getDefaultSpectators() }), options);
 		this.spectatorChain = new SpectatorManager(this.config.spectators);
 		this.subscriberChain = new SubscriberManager(this.config.subscribers);
-
-		this.element.addEventListener(
-			'click',
-			e => {
-				this.config.clickHandler && this.config.clickHandler(e, this);
-			},
-			false
-		);
+		this.event = this.config.clickHandler ? this.config.clickHandler.bind(this, this) : () => {};
 	}
 
 	watch() {
-		this.handleId = setInterval(() => {
-			const spectatorsResult = this.spectatorChain.run(this);
-			return this.subscriberChain.dispatch(this, spectatorsResult);
-		}, this.config.watchInterval);
+		this.scheduler = new IntervalScheduler({ context: this, subscriberChain: this.subscriberChain, spectatorChain: this.spectatorChain, interval: this.config.watchInterval });
+		this.element.addEventListener('click', this.event, false);
 	}
 
 	unwatch() {
-		clearInterval(this.handleId);
+		this.scheduler.clearSchedule();
+		this.element.removeEventListener('click', this.event);
 	}
 }
 
