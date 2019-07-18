@@ -1,6 +1,6 @@
 export default class SpectatorManager {
-	constructor() {
-		this.chain = [];
+	constructor(chain) {
+		this.chain = chain || [];
 		this.prevResult = {};
 	}
 

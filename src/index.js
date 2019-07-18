@@ -1,19 +1,31 @@
-import defaultConfig from './defaultConfig';
-import * as subscribers from './subscribers';
-
-import getDefaultSpectators from './spectators';
+import defaultConfig from './config/defaultConfig';
+import { mergeConfig } from './config/helper';
+import domSubscriber from './subscribers/domSubscriber';
+import getDefaultSpectators from './spectators/defaultSpectators';
+import SpectatorManager from './spectators/spectatorManager';
+import SubscriberManager from './subscribers/subscriberManager';
 
 class Perceptor {
 	constructor(DOMElement, options = {}) {
 		this.element = DOMElement;
-		this.spectators = getDefaultSpectators();
-		this.config = Object.assign({}, defaultConfig, Perceptor.defaults, options);
+		this.config = mergeConfig(Object.assign({}, defaultConfig, Perceptor.defaults, { subscribers: [domSubscriber], spectators: getDefaultSpectators() }), options);
+		this.spectatorChain = new SpectatorManager(this.config.spectators);
+		this.subscriberChain = new SubscriberManager(this.config.subscribers);
+
+		this.element.addEventListener(
+			'click',
+			e => {
+				this.config.clickHandler && this.config.clickHandler(e, this);
+			},
+			false
+		);
 	}
 
 	watch() {
 		this.handleId = setInterval(() => {
-			return this.config.reporter(this, { ...this.spectators.run(this) });
-		}, 500);
+			const spectatorsResult = this.spectatorChain.run(this);
+			return this.subscriberChain.dispatch(this, spectatorsResult);
+		}, this.config.watchInterval);
 	}
 
 	unwatch() {
@@ -22,6 +34,5 @@ class Perceptor {
 }
 
 Perceptor.defaults = Object.assign({}, defaultConfig);
-Perceptor.subscribers = subscribers;
 
 export default Perceptor;

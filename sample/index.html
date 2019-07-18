@@ -34,6 +34,7 @@
 	</body>
 	<script src="..\dist\bundle.js"></script>
 	<script>
+		window.log = console.log.bind(console);
 		function printStatus() {
 			if (typeof window.log === 'function') {
 				window.log();
@@ -41,8 +42,12 @@
 
 			setTimeout(printStatus, 500);
 		}
-		let t = new Perceptor(document.querySelector('#ad2'));
+		window.clickCount = 0;
+		let t = new Perceptor(document.querySelector('#ad2'), {
+			clickHandler: function() {
+				window.log(clickCount++);
+			}
+		});
 		t.watch();
-		// printStatus();
 	</script>
 </html>
