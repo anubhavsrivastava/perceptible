@@ -7,8 +7,6 @@ const isArray = candidate => {
 export function mergeConfig(baseConfig, extensionConfig) {
 	if (extensionConfig) {
 		for (var key in extensionConfig) {
-			console.log(key);
-
 			if (arrayMergeList.includes(key)) {
 				extensionConfig[key] = isArray(extensionConfig[key]) ? extensionConfig[key] : [extensionConfig[key]];
 				baseConfig[key] = baseConfig[key] || [];
