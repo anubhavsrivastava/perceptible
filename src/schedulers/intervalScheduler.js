@@ -21,6 +21,7 @@ export default class IntervalScheduler {
 			}, interval);
 		} else if (this._enabled) {
 			clearInterval(this.handleId);
+			// should let the subscribers know that pageIs not Visible anymore
 		}
 	}
 

@@ -13,7 +13,7 @@ export default function durationSpectator(context, currentResult, prevResult) {
 	let { duration = 0 } = prevResult;
 
 	if (currentResult.isVisible && prevResult.isVisible) {
-		duration += currentResult.time - prevResult.time;
+		duration += context.config.scheduler.interval; //currentResult.time - prevResult.time;
 	}
 
 	return { duration };
