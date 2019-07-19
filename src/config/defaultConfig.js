@@ -10,7 +10,8 @@ const config = {
 	scheduler: {
 		mode: 'interval', // interval, scroll, raf, observer
 		// currently on interval is supported
-		interval: 500 // ms of interval time, applicable for only "interval" type of mode
+		interval: 500, // ms of interval time, applicable for only "interval" type of mode
+		attentionMode: false // Mode to disable schedulers if browser if not in focus (although visible on the screen)
 	},
 
 	viewOffset: {
