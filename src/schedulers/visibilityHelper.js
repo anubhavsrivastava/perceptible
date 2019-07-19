@@ -34,7 +34,6 @@ export const onPageVisibilityChange = (fn = () => {}, attentionMode = true) => {
 
 	document.addEventListener(visibilityChange, () => {
 		let currentVisibility = isPageVisible();
-		console.log(currentVisibility, lastVisibility);
 		if (lastVisibility != currentVisibility) {
 			fn(currentVisibility);
 			lastVisibility = currentVisibility;
