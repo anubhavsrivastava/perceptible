@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2017-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 const React = require('react');
 
 const CompLibrary = require('../../core/CompLibrary.js');
@@ -19,7 +12,7 @@ class HomeSplash extends React.Component {
 		const { baseUrl, docsUrl } = siteConfig;
 		const docsPart = `${docsUrl ? `${docsUrl}/` : ''}`;
 		const langPart = `${language ? `${language}/` : ''}`;
-		const docUrl = doc => `${baseUrl}${docsPart}${langPart}${doc}`;
+		const docUrl = doc => `${baseUrl}${docsPart}${doc}`;
 
 		const SplashContainer = props => (
 			<div className="homeContainer">
@@ -60,15 +53,15 @@ class HomeSplash extends React.Component {
 
 		return (
 			<SplashContainer>
-				<Logo img_src={`${baseUrl}img/undraw_monitor.svg`} />
 				<div className="inner">
 					<ProjectTitle siteConfig={siteConfig} />
 					<PromoSection>
 						{/* <Button href="#try">Try It Out</Button> */}
 						<Button href={docUrl('main')}>Documentation</Button>
-						<Button href={'/sample'}>Examples</Button>
+						<Button href={siteConfig.examplePath}>Examples</Button>
 					</PromoSection>
 				</div>
+				{/* <Logo img_src={`${baseUrl}img/undraw_monitor.svg`} /> */}
 			</SplashContainer>
 		);
 	}
@@ -181,13 +174,17 @@ class Index extends React.Component {
 
 		return (
 			<div>
+				<div style={{ marginTop: '50px', textAlign: 'center' }} className="projectLsogo">
+					<img width="300px" src={`${baseUrl}img/logo.png`} alt="Project Logo" />
+				</div>
 				<HomeSplash siteConfig={siteConfig} language={language} />
+
 				<div className="mainContainer">
-					<Features />
-					<FeatureCallout />
-					<LearnHow />
-					<TryOut />
-					<Description />
+					{/* <Features /> */}
+					{/* <FeatureCallout /> */}
+					{/* <LearnHow /> */}
+					{/* <TryOut /> */}
+					{/* <Description /> */}
 					{/* <Showcase /> */}
 				</div>
 			</div>
