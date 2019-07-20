@@ -3,12 +3,39 @@ id: configlevel
 title: Configuration Hierarchy
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac euismod odio, eu consequat dui. Nullam molestie consectetur risus id imperdiet. Proin sodales ornare turpis, non mollis massa ultricies id. Nam at nibh scelerisque, feugiat ante non, dapibus tortor. Vivamus volutpat diam quis tellus elementum bibendum. Praesent semper gravida velit quis aliquam. Etiam in cursus neque. Nam lectus ligula, malesuada et mauris a, bibendum faucibus mi. Phasellus ut interdum felis. Phasellus in odio pulvinar, porttitor urna eget, fringilla lectus. Aliquam sollicitudin est eros. Mauris consectetur quam vitae mauris interdum hendrerit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Configuration for Perceptor can be done either on per instance level or at global level that is applicable to all Perceptor instance.
 
-Duis et egestas libero, imperdiet faucibus ipsum. Sed posuere eget urna vel feugiat. Vivamus a arcu sagittis, fermentum urna dapibus, congue lectus. Fusce vulputate porttitor nisl, ac cursus elit volutpat vitae. Nullam vitae ipsum egestas, convallis quam non, porta nibh. Morbi gravida erat nec neque bibendum, eu pellentesque velit posuere. Fusce aliquam erat eu massa eleifend tristique.
+Complete set of configuration options can be seen [here](configuration.md)
 
-Sed consequat sollicitudin ipsum eget tempus. Integer a aliquet velit. In justo nibh, pellentesque non suscipit eget, gravida vel lacus. Donec odio ante, malesuada in massa quis, pharetra tristique ligula. Donec eros est, tristique eget finibus quis, semper non nisl. Vivamus et elit nec enim ornare placerat. Sed posuere odio a elit cursus sagittis.
+## Instance Configuration
 
-Phasellus feugiat purus eu tortor ultrices finibus. Ut libero nibh, lobortis et libero nec, dapibus posuere eros. Sed sagittis euismod justo at consectetur. Nulla finibus libero placerat, cursus sapien at, eleifend ligula. Vivamus elit nisl, hendrerit ac nibh eu, ultrices tempus dui. Nam tellus neque, commodo non rhoncus eu, gravida in risus. Nullam id iaculis tortor.
+Instance level configuration can be changed at the time of instance creation, using `options` param in the Perceptor constructor.
 
-Nullam at odio in sem varius tempor sit amet vel lorem. Etiam eu hendrerit nisl. Fusce nibh mauris, vulputate sit amet ex vitae, congue rhoncus nisl. Sed eget tellus purus. Nullam tempus commodo erat ut tristique. Cras accumsan massa sit amet justo consequat eleifend. Integer scelerisque vitae tellus id consectetur.
+Example
+
+```js
+var tObserve = new Perceptor(document.querySelector('#testdiv'), { threshold: 80 }).watch();
+```
+
+## Global Configuration
+
+Global configurations can be changed via `Perceptor.defaults` object. This settings are applied to all Perceptor instance.
+
+Example
+
+```js
+Perceptor.defaults.threshold = 80;
+```
+
+## Hierarchy
+
+Preference order of configuration is as follows (most preferred to least)
+
+-   Instance level
+-   Global Level
+-   Default config (check [default configurations](configuration.md))
+
+## Merge Criterion
+
+All configuration fields are over-written by order of hierarchy except
+`subscribers` and `spectators`. Both this fields are joined with previous configuration. For example, if global configuration a spectator function - A1 is present and at instance a spectator function A2 is passed, it will result into [A1, A2]

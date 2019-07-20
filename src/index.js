@@ -35,6 +35,8 @@ class Perceptor {
 	}
 }
 
+// Global Perceptor Configuration
+// This settings are applied to all Perceptor instance.
 Perceptor.defaults = Object.assign({}, defaultConfig);
 
 export default Perceptor;
