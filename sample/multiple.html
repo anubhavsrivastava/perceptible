@@ -39,7 +39,6 @@
 			if (typeof window.log === 'function') {
 				window.log();
 			}
-
 			setTimeout(printStatus, 500);
 		}
 		window.clickCount = 0;
@@ -52,7 +51,8 @@
 		let t2 = new Perceptor(document.querySelector('#ad2'), {
 			clickHandler: function(e, f) {
 				window.log(e, f, clickCount++);
-			}
+			},
+			scheduler: { interval: 1000, attentionMode: false }
 		});
 		t2.watch();
 	</script>
