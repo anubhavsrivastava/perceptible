@@ -16,13 +16,22 @@ class Perceptor {
 	}
 
 	watch() {
-		this.scheduler = new IntervalScheduler({ context: this, subscriberChain: this.subscriberChain, spectatorChain: this.spectatorChain, config: this.config.scheduler });
-		this.element.addEventListener('click', this.event, false);
+		if (!this.scheduler) {
+			this.scheduler = new IntervalScheduler({ context: this, subscriberChain: this.subscriberChain, spectatorChain: this.spectatorChain, config: this.config.scheduler });
+			this.element.addEventListener('click', this.event, false);
+		}
+
+		return this;
 	}
 
 	unwatch() {
-		this.scheduler.clearSchedule();
-		this.element.removeEventListener('click', this.event);
+		if (this.scheduler) {
+			this.scheduler.clearSchedule();
+			delete this['scheduler'];
+			this.element.removeEventListener('click', this.event);
+		}
+
+		return this;
 	}
 }
 

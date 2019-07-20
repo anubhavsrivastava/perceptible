@@ -3,12 +3,60 @@ id: perceptor
 title: Perceptor
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac euismod odio, eu consequat dui. Nullam molestie consectetur risus id imperdiet. Proin sodales ornare turpis, non mollis massa ultricies id. Nam at nibh scelerisque, feugiat ante non, dapibus tortor. Vivamus volutpat diam quis tellus elementum bibendum. Praesent semper gravida velit quis aliquam. Etiam in cursus neque. Nam lectus ligula, malesuada et mauris a, bibendum faucibus mi. Phasellus ut interdum felis. Phasellus in odio pulvinar, porttitor urna eget, fringilla lectus. Aliquam sollicitudin est eros. Mauris consectetur quam vitae mauris interdum hendrerit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+`Perceptor` is basic structure of this library which keeps track of DOM Element. It makes use of [Scheduler](schedulers.md), [Spectators](spectators.md) and [Subscribers](subscribers.md) to watch over an Element for its visibility. `Perceptor` class offers a set of configuration (both global and per instance) to work upon a DOM element. It provides mechanism to enable/disable visibility detection at runtime and also keeps a watch on `click` event on the element.
 
-Duis et egestas libero, imperdiet faucibus ipsum. Sed posuere eget urna vel feugiat. Vivamus a arcu sagittis, fermentum urna dapibus, congue lectus. Fusce vulputate porttitor nisl, ac cursus elit volutpat vitae. Nullam vitae ipsum egestas, convallis quam non, porta nibh. Morbi gravida erat nec neque bibendum, eu pellentesque velit posuere. Fusce aliquam erat eu massa eleifend tristique.
+## Constructor
 
-Sed consequat sollicitudin ipsum eget tempus. Integer a aliquet velit. In justo nibh, pellentesque non suscipit eget, gravida vel lacus. Donec odio ante, malesuada in massa quis, pharetra tristique ligula. Donec eros est, tristique eget finibus quis, semper non nisl. Vivamus et elit nec enim ornare placerat. Sed posuere odio a elit cursus sagittis.
+> constructor(DOMElement, options)
 
-Phasellus feugiat purus eu tortor ultrices finibus. Ut libero nibh, lobortis et libero nec, dapibus posuere eros. Sed sagittis euismod justo at consectetur. Nulla finibus libero placerat, cursus sapien at, eleifend ligula. Vivamus elit nisl, hendrerit ac nibh eu, ultrices tempus dui. Nam tellus neque, commodo non rhoncus eu, gravida in risus. Nullam id iaculis tortor.
+-   Params
 
-Nullam at odio in sem varius tempor sit amet vel lorem. Etiam eu hendrerit nisl. Fusce nibh mauris, vulputate sit amet ex vitae, congue rhoncus nisl. Sed eget tellus purus. Nullam tempus commodo erat ut tristique. Cras accumsan massa sit amet justo consequat eleifend. Integer scelerisque vitae tellus id consectetur.
+    -   [DOM Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) - type: DOMElement, _mandatory_
+    -   `options` - type: Object, _Optional_
+
+    You can check `options` object in the [configuration](configuration.md) section.
+
+-   Returns
+    -   _Instance of Perceptor_
+
+Usage:
+
+```javascript
+var advertisementDiv = new Perceptor(document.querySelector('#testdiv'));
+```
+
+## APIs
+
+> watch()
+
+This API will trigger the instance into watch mode. This is mandatory function to be called to start the instance for detecting viewability.
+
+> unwatch()
+
+This API will disable the Perceptor instance from detecting for viewability.
+
+## Properties
+
+> config : _Object_
+
+The configuration that is applicable to current instance.
+
+> element : _DOMElement_
+
+The DOM Element under observation.
+
+> event : _function_
+
+Function that is triggered when `element` is clicked
+
+> spectatorChain: _SpectatorManager_
+
+Instance of _SpectatorManager_ for current instance
+
+> subscriberChain: _SubscriberManager_
+
+Instance of _SubscriberManager_ for current instance
+
+> scheduler: _Scheduler_
+
+Instance of _Scheduler_ for current instance
