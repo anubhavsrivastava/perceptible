@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://anubhavsrivastava.github.io/blog</id>
+    <title>Perceptible Blog</title>
+    <updated>2019-07-20T06:00:00Z</updated>
+    <generator>Feed for Node.js</generator>
+    <link rel="alternate" href="https://anubhavsrivastava.github.io/blog"/>
+    <subtitle>The best place to stay up-to-date with the latest Perceptible news and events.</subtitle>
+    <logo>https://anubhavsrivastava.github.io/</logo>
+    <rights>Copyright © 2019</rights>
+    <entry>
+        <title type="html"><![CDATA[Initial release]]></title>
+        <id>https://anubhavsrivastava.github.io/blog/2019/07/20/blog-post.html</id>
+        <link href="https://anubhavsrivastava.github.io/blog/2019/07/20/blog-post.html">
+        </link>
+        <updated>2019-07-20T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p>Initial Release</p>
+]]></summary>
+        <author>
+            <name>Anubhav</name>
+            <uri>http://theanubhav.com/</uri>
+        </author>
+    </entry>
+</feed>
