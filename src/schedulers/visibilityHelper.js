@@ -27,7 +27,7 @@ const isPageVisible = () => {
 export const onPageVisibilityChange = (fn = () => {}, attentionMode = true) => {
 	let lastVisibility = undefined;
 
-	// When window is switched and switched back - both pageVisibilty API event and 'focus' event are triggered.
+	// When window is switched over and switched back - both pageVisibilty API event and 'focus' event are triggered.
 	// The callback handler in each event ensure that callback(fn) will be called only if there is
 	// actual change in visibility by checking previousState(lastVisibility).
 	// The sequence of execution isn't guaranteed but sequential execution is guaranteed in `task` in event loop
