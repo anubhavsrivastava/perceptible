@@ -1,10 +1,10 @@
 {
 	"docs": {
-		"Getting Starter": ["main"],
-		"Usage": ["configuration"],
-		"Advanced Topics": ["doc3"]
+		"Getting Starter": ["main", "basicsample", "perceptor"],
+		"Usage": ["configuration", "configlevel", "defaultconfig"],
+		"Advance Guide": ["architecture", "spectators", "subscribers", "schedulers"]
 	},
 	"docs-other": {
-		"First Category": ["doc4", "doc5"]
+		"First Category": ["examplemain", "doc5"]
 	}
 }

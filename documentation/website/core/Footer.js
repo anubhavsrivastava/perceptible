@@ -32,7 +32,7 @@ class Footer extends React.Component {
 						<h5>Docs</h5>
 						<a href={this.docUrl('main', this.props.language)}>Getting Started </a>
 						<a href={this.docUrl('configuration', this.props.language)}>Configuration and Usage </a>
-						<a href={this.docUrl('doc3.html', this.props.language)}>Advance Guide</a>
+						<a href={this.docUrl('architecture', this.props.language)}>Advance Guide</a>
 					</div>
 					<div>
 						<h5>Community</h5>
@@ -67,7 +67,7 @@ class Footer extends React.Component {
 					</div>
 				</section>
 
-				<section className="copyright">{this.props.config.copyright}</section>
+				<section className="copyright">{this.props.config.copyright} Perceptible</section>
 			</footer>
 		);
 	}

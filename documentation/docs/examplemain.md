@@ -1,6 +1,6 @@
 ---
-id: doc4
-title: Other Document
+id: examplemain
+title: Example
 ---
 
 this is another document
