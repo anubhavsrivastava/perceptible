@@ -25,12 +25,12 @@ function Help(props) {
 			title: 'Browse Docs'
 		},
 		{
-			content: 'Ask questions about the documentation and project',
-			title: 'Join the community'
+			content: `Star on [Github](${siteConfig.repoUrl}) to express it`,
+			title: 'Like the project'
 		},
 		{
-			content: "Find out what's new with this project",
-			title: 'Stay up to date'
+			content: `Open a [Pull Request](${siteConfig.repoUrl}/pulls) on the Repo`,
+			title: 'Suggestions/Improvement/Feedback'
 		}
 	];
 
@@ -41,7 +41,10 @@ function Help(props) {
 					<header className="postHeader">
 						<h1>Need help?</h1>
 					</header>
-					<p>This project is maintained by a dedicated group of people.</p>
+					<p>
+						This project is maintained by -<a href="https://github.com/anubhavsrivastava"> Anubhav</a>
+					</p>
+					<p> You can reach out on any social platform</p>
 					<GridBlock contents={supportLinks} layout="threeColumn" />
 				</div>
 			</Container>
