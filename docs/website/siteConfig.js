@@ -37,7 +37,7 @@ const siteConfig = {
 	//   organizationName: 'JoelMarcey'
 
 	// For no header links in the top nav bar -> headerLinks: [],
-	headerLinks: [{ doc: 'doc1', label: 'Docs' }, { doc: 'doc4', label: 'API' }, { page: 'help', label: 'Help' }, { blog: true, label: 'Release' }],
+	headerLinks: [{ doc: 'main', label: 'Docs' }, { doc: 'doc4', label: 'Examples' }, { page: 'help', label: 'Help' }, { blog: true, label: 'Release' }],
 
 	// If you have users set above, you add it here:
 	users,
@@ -85,21 +85,21 @@ const siteConfig = {
 
 	// Open Graph and Twitter card images.
 	ogImage: 'img/undraw_online.svg',
-	twitterImage: 'img/undraw_tweetstorm.svg'
+	twitterImage: 'img/undraw_tweetstorm.svg',
 
 	// For sites with a sizable amount of content, set collapsible to true.
 	// Expand/collapse the links and subcategories under categories.
-	// docsSideNavCollapsible: true,
+	docsSideNavCollapsible: true,
 
 	// Show documentation's last contributor's name.
-	// enableUpdateBy: true,
+	enableUpdateBy: true,
 
 	// Show documentation's last update time.
-	// enableUpdateTime: true,
+	enableUpdateTime: true,
 
 	// You may provide arbitrary config keys to be used as needed by your
 	// template. For example, if you need your repo's URL...
-	//   repoUrl: 'https://github.com/facebook/test-site',
+	repoUrl: 'https://github.com/anubhavsrivastava/perceptible'
 };
 
 module.exports = siteConfig;
