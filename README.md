@@ -10,7 +10,7 @@
 	<br/>
 </div>
 
-A basic implementation to detect visibility of DOM Elements
+A basic implementation to detect visibility of DOM Elements with Zero dependencies.
 
 Perceptible can be used to detect viewability of any DOM element that the user is currently looking at. A Element may be part of the page but not under current viewport (due to user scroll), perceptible helps to calculate viewability for such elements for analytics and other purpose.
 
