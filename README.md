@@ -12,6 +12,10 @@
 
 A basic implementation to detect visibility of DOM Elements
 
+Perceptible can be used to detect viewability of any DOM element that the user is currently looking at. A Element may be part of the page but not under current viewport (due to user scroll), perceptible helps to calculate viewability for such elements for analytics and other purpose.
+
+In addition to view port, it also consider page focus and switching of tabs while calculating the visibility of element. Entire visibility duration of the element is also reported.
+
 View the sample using `npm run sample`
 
 ## Documentation
