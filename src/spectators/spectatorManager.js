@@ -20,7 +20,7 @@ export default class SpectatorManager {
 		const updatedResult = this.chain.reduce((currentResult, spectator) => {
 			if (spectator) {
 				//todo check result is an object
-				currentResult = Object.assign(currentResult, spectator(perceptorContext, currentResult, this.prevResult));
+				currentResult = Object.assign(currentResult, spectator(perceptorContext, currentResult, this.prevResult) || {});
 			}
 			return currentResult;
 		}, Object.assign({}, this.prevResult));

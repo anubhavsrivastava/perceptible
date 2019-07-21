@@ -17,7 +17,7 @@ Consider the following HTML structure,
 	</head>
 	<body>
 		<div id="testdiv" style="color:#fff;background:#000;height:100px;width:100px;">
-			Sample element
+			Element to Track
 		</div>
 	</body>
 </html>
