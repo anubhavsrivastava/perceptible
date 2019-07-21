@@ -14,6 +14,10 @@ A basic implementation to detect visibility of DOM Elements
 
 View the sample using `npm run sample`
 
+## Documentation
+
+Entire documentation is available on [`perceptible.netlify.com`](https://perceptible.netlify.com/)
+
 ## Development
 
 This project uses npm package manager and WebPack as bundler.
