@@ -123,7 +123,7 @@ Consider the following HTML structure,
 	});
 
 	var customSpectator = function(perceptor, currentResult, previous) {
-		//if float is present in chile DOM, it should be reported as visibile
+		//if float is present in child DOM, it should be reported as visibile
 		if (document.getElementById('testcontainer').classList.contains('float')) {
 			currentResult.isVisible = true;
 		}
