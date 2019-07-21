@@ -1,5 +1,13 @@
+---
+id: examplemultiple
+title: Multiple Instance
+---
+
+Following example initialises Multiple Perceptor on `#testdiv` and `#testdiv2` elements to watch for visibility
+
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<style>
 			body {
@@ -33,11 +41,18 @@
 			Element To Track
 		</div>
 	</body>
-	<script src="..\dist\bundle.js"></script>
-	<script>
-		let t1 = new Perceptor(document.querySelector('#testDiv'));
-		t1.watch();
-		let t2 = new Perceptor(document.querySelector('#testDiv2'));
-		t2.watch();
-	</script>
 </html>
+```
+
+The following script will observe the `div#testdiv` DOM Element
+
+```html
+<script>
+	var t1 = new Perceptor(document.querySelector('#testDiv'));
+	t1.watch();
+	var t2 = new Perceptor(document.querySelector('#testDiv2'));
+	t2.watch();
+</script>
+```
+
+Check the live version [here](/sample/multiple)
