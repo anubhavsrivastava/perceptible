@@ -1,39 +1,10 @@
 ---
-id: subscribers
-title: Subscribers
+id: examplesubscribers
+title: Custom Subscriber
 ---
 
-![Subscribers](/img/subscribers.png)
-
-`Subscribers` are watcher for SpectatorResult for each run. Subscriber are used make meaningful information for the Perceptor result.
-
-## Default Subscribers
-
-Perceptor comes with default Subscribers. By default `dom` subscriber is used. This can be changed via `defaultSubscriber` option in [configuration](configuration.md)
-
-### domSubscriber
-
-`defaultSubscriber: 'dom'`
-
-This subscriber outputs entire SpectatorResult on bottom-left corner of the browser.
-
-![DOMsubscriber](/img/domsubscriber.png)
-
-### consoleSubscriber
-
-`defaultSubscriber: 'dom'`
-
-This subscriber outputs entire SpectatorResult on console of the browser.
-
-![ConsoleSubscriber](/img/consolesubscriber.png)
-
-## Adding Custom Subscriber
-
-> SubscriberFunction<PerceptorContext, SpectatorResult> : null
-
-You can add subscriber function by hooking into `subscribers` configuration
-
-### Example
+Following example initialises Multiple Perceptor on `#testdiv`.
+A subscriber displays the visibility in terms of colors. 'Red' for visibility less than 20%, 'Orange' for less than 50% and 'Green' for more than 50%
 
 Consider the following HTML structure,
 
