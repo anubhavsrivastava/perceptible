@@ -100,7 +100,9 @@ const siteConfig = {
 
 	// You may provide arbitrary config keys to be used as needed by your
 	// template. For example, if you need your repo's URL...
-	repoUrl: 'https://github.com/anubhavsrivastava/perceptible'
+	repoUrl: 'https://github.com/anubhavsrivastava/perceptible',
+	gaTrackingId: 'UA-45109327-6',
+	gaGtag: true
 };
 
 module.exports = siteConfig;
