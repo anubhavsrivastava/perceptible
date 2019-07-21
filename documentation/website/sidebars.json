@@ -5,6 +5,6 @@
 		"Advance Guide": ["architecture", "spectators", "subscribers", "schedulers"]
 	},
 	"docs-other": {
-		"Examples": ["examplemain", "examplemultiple", "exampleunwatch", "exampleconfig", "exampleoffset", "exampleclick"]
+		"Examples": ["examplemain", "examplemultiple", "exampleunwatch", "exampleconfig", "exampleoffset", "exampleclick", "examplespectator"]
 	}
 }
