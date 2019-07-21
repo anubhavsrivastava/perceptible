@@ -8,7 +8,7 @@
 		"write-translations": "docusaurus-write-translations",
 		"version": "docusaurus-version",
 		"rename-version": "docusaurus-rename-version",
-		"copydist": "cp -R ../../dist/ static/dist/ "
+		"copydist": "cp -R ../../dist/ static/dist/ && cp -R ../../sample/ pages/sample/"
 	},
 	"devDependencies": {
 		"docusaurus": "^1.12.0",

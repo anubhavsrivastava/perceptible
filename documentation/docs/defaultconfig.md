@@ -23,6 +23,7 @@ Default configuration that is used for all Perceptor instance
 	},
 	"subscribers": [],
 	"spectators": [],
-	"clickHandler": () => {}
+	"clickHandler": () => {},
+	"defaultSubscriber": "dom"
 }
 ```

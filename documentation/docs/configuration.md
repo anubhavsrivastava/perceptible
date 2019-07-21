@@ -116,3 +116,13 @@ In addition to default spectators to calculate the viewability/visibility of the
 `default: noop () => {}`
 
 A function that would be triggered with the context of current perceptor instance on 'click' event over the DOM element.
+
+## defaultSubscriber
+
+`type: string`
+
+`default: 'dom`
+
+`possible values: dom, console, none`
+
+The default subscriber that has to be used. If you add a subscriber in subscribers option, you can disable the default subscriber by `defaultSubscriber: 'none'` .
