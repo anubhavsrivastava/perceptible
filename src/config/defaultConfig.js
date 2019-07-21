@@ -23,7 +23,8 @@ const config = {
 
 	subscribers: [],
 	spectators: [],
-	clickHandler: () => {}
+	clickHandler: () => {},
+	defaultSubscriber: 'dom'
 };
 
 export default config;
