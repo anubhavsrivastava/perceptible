@@ -38,7 +38,7 @@
 		<div id="testdiv">
 			Element to Track
 			<div id="testcontainer">
-				Click on me
+				Click on me and scroll
 			</div>
 		</div>
 	</body>
@@ -51,10 +51,13 @@
 			//This will make the inner element always visbile if 'float' is added
 		});
 
-		var customSpectator = function(perceptor, currentResult, previous) {
+		var customSpectator = function(perceptor, currentResult, prevResult) {
 			//if float is present in chile DOM, it should be reported as visibile
 			if (document.getElementById('testcontainer').classList.contains('float')) {
 				currentResult.isVisible = true;
+				if (currentResult.isVisible && prevResult.isVisible) {
+					currentResult.duration += perceptor.config.scheduler.interval;
+				}
 			}
 		};
 		var tObserve = new Perceptor(document.querySelector('#testdiv'), { spectators: [customSpectator] });
