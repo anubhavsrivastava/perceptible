@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Ad Detection</title>
 		<style>
 			body {
 				height: 2000px;
@@ -35,9 +36,10 @@
 	</body>
 	<script src="..\dist\bundle.js"></script>
 	<script>
-		var t1 = new Perceptor(document.querySelector('#testDiv'));
+		Perceptor.defaults.threshold = 50;
+		var t1 = new Perceptor(document.querySelector('#testDiv'), { scheduler: { interval: 500 } });
 		t1.watch();
-		var t2 = new Perceptor(document.querySelector('#testDiv2'));
+		var t2 = new Perceptor(document.querySelector('#testDiv2'), { scheduler: { interval: 1000 } });
 		t2.watch();
 	</script>
 </html>
