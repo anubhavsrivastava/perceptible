@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "webpack --watch",
 		"build": "webpack",
-		"sample": "npx http-server -o",
+		"sample": "npx http-server ./documentation/website/pages/sample -o ",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
