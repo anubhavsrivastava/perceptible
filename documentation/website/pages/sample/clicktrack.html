@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Perceptor Examples</title>
+		<style>
+			body {
+				height: 2000px;
+				width: 2500px;
+			}
+			#testDiv {
+				width: 300px;
+				height: 250px;
+				color: #fff;
+				padding: 20px;
+				background: #6c63ff;
+				position: relative;
+				left: 100px;
+				top: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="testDiv">
+			Element To Track
+
+			<br />
+			<span> click count </span>
+			<span id="count">0 </span>
+		</div>
+	</body>
+	<script src="..\dist\bundle.js"></script>
+	<script>
+		var clickCount = 0;
+		var t1 = new Perceptor(document.querySelector('#testDiv'), {
+			clickHandler: function(e, f) {
+				clickCount++;
+				document.getElementById('count').innerText = clickCount;
+			}
+		});
+		t1.watch();
+	</script>
+</html>
