@@ -105,4 +105,5 @@ const siteConfig = {
 	gaGtag: true
 };
 
+//eslint-disable-next-line
 module.exports = siteConfig;
