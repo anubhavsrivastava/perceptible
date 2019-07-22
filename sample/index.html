@@ -9,6 +9,7 @@
 			}
 			#ad,
 			#ad2 {
+				top: 200px;
 				width: 300px;
 				height: 250px;
 				background: #6c63ff;
@@ -17,7 +18,9 @@
 				top: 100px;
 			}
 			#ad2 {
-				left: 500px;
+				position: absolute;
+				background: grey;
+				left: 200px;
 			}
 		</style>
 	</head>
@@ -43,7 +46,7 @@
 			setTimeout(printStatus, 500);
 		}
 		window.clickCount = 0;
-		var t = new Perceptor(document.querySelector('#ad'), {
+		var t = new Perceptor(document.querySelector('#ad2'), {
 			clickHandler: function(e, f) {
 				window.log(e, f, clickCount++);
 			}
