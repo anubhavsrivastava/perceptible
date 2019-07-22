@@ -128,16 +128,22 @@ class Index extends React.Component {
 			<Block layout="fourColumn">
 				{[
 					{
-						content: 'This is the content of my feature',
-						image: `${baseUrl}img/undraw_react.svg`,
+						content: 'Does not rely on any other library/package',
+						// image: `${baseUrl}img/undraw_react.svg`,
 						imageAlign: 'top',
-						title: 'Feature One'
+						title: 'Zero Dependency'
 					},
 					{
-						content: 'The content of my second feature',
-						image: `${baseUrl}img/undraw_operating_system.svg`,
+						content: '',
+						// image: `${baseUrl}img/undraw_operating_system.svg`,
 						imageAlign: 'top',
-						title: 'Feature Two'
+						title: 'Highly Configurable'
+					},
+					{
+						content: 'Uses Page Visibility APIs to detect Browser focus',
+						// image: `${baseUrl}img/undraw_operating_system.svg`,
+						imageAlign: 'top',
+						title: 'Browser Tab Visilibility'
 					}
 				]}
 			</Block>
