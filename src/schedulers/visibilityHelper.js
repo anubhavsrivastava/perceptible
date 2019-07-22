@@ -3,6 +3,7 @@
 // Refer caniuse for browser support: https://caniuse.com/#search=pagevisibility
 
 // Set the name of the hidden property and the change event for visibility
+// This is webkit specific
 let hidden, visibilityChange;
 if (typeof document.hidden !== 'undefined') {
 	// Opera 12.10 and Firefox 18 and later support
@@ -20,10 +21,11 @@ const isPageVisible = () => {
 	return !document[hidden];
 };
 
-// const isPageHidden = () => {
-// 	return document[hidden];
-// };
-
+/**
+ * Registers a function to be called on change of Page visibility
+ * @param {function} fn - Function to be called on event
+ * @param {boolean} attentionMode - Enable Attention mode
+ */
 export const onPageVisibilityChange = (fn = () => {}, attentionMode = true) => {
 	let lastVisibility = undefined;
 
