@@ -1,3 +1,10 @@
+/**
+ * Overall duration for which the Perceptor was visible
+ * @param {Perceptor} context
+ * @param {object} currentResult
+ * @param {object} prevResult
+ * @returns {object} - resultant
+ */
 export default function durationSpectator(context, currentResult, prevResult) {
 	/***
 	 *
