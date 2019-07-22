@@ -37,7 +37,7 @@ There is set of default Spectators that always run to detect the visibility of P
 
 `Output: { duration: <time in ms> }`
 
-`durationSpectator` overall duration for which the Perceptor was visible
+`durationSpectator` adds overall `duration` for which the Perceptor was visible
 
 ### Combined Response
 
