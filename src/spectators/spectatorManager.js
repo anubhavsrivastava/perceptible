@@ -5,9 +5,11 @@ export default class SpectatorManager {
 	}
 
 	use(fn) {
-		//todo :check whether it is a function
-		this.chain.push(fn);
-		return this.chain.length - 1;
+		if (typeof fn === 'function') {
+			this.chain.push(fn);
+			return this.chain.length - 1;
+		}
+		return null;
 	}
 
 	eject(id) {
@@ -19,7 +21,6 @@ export default class SpectatorManager {
 	run(perceptorContext) {
 		const updatedResult = this.chain.reduce((currentResult, spectator) => {
 			if (spectator) {
-				//todo check result is an object
 				currentResult = Object.assign(currentResult, spectator(perceptorContext, currentResult, this.prevResult) || {});
 			}
 			return currentResult;

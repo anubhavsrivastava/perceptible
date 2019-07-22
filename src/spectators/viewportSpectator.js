@@ -12,7 +12,6 @@ export default function viewPortSpectator(context) {
 
 export const isBoxed = function(container, node, config) {
 	const threshold = config && config['threshold'] !== undefined ? config.threshold : 100;
-	// todo: validate viewOffset values
 	const { viewOffset = { top: 0, left: 0, right: 0, bottom: 0 } } = config;
 
 	const nodeRight = node.left + node.width;

@@ -4,9 +4,11 @@ export default class SubscriberManager {
 	}
 
 	use(fn) {
-		//todo :check whether it is a function
-		this.chain.push(fn);
-		return this.chain.length - 1;
+		if (typeof fn === 'function') {
+			this.chain.push(fn);
+			return this.chain.length - 1;
+		}
+		return null;
 	}
 
 	eject(id) {
