@@ -1,5 +1,6 @@
 import { getElementPosition, getCurrentViewport } from '../utils/view';
 
+// This is experimental spectator and is not used currently
 export default function layerSpectator(context, currentResult) {
 	const topSurface = {};
 	let nodeDimension = {};
