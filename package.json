@@ -1,6 +1,6 @@
 {
 	"name": "perceptible",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "detect visibility of DOM Elements",
 	"main": "dist/bundle.js",
 	"scripts": {
