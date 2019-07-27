@@ -7,9 +7,11 @@
 		"start": "webpack --watch",
 		"build": "webpack",
 		"sample": "npx http-server -o ",
+		"lint": "npx eslint ./src --config .eslintrc.js",
 		"test": "jest",
 		"test:watch": "jest --watch",
-		"test:coverage": "jest --coverage"
+		"test:coverage": "jest --coverage",
+		"coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
 	},
 	"repository": {
 		"type": "git",

@@ -4,7 +4,7 @@
  */
 export const getCurrentViewport = function() {
 	if (document.documentElement && document.documentElement.clientHeight) {
-		return { ...getCurrentScrollPosition(), height: document.documentElement.clientHeight, width: document.documentElement.clientWidth };
+		return Object.assign(getCurrentScrollPosition(), { height: document.documentElement.clientHeight, width: document.documentElement.clientWidth });
 	}
 	return { left: 0, top: 0, width: 0, height: 0 };
 };
