@@ -7,7 +7,8 @@
 		"start": "webpack --watch",
 		"build": "webpack",
 		"sample": "npx http-server -o ",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "jest",
+		"test:watch": "jest --watch"
 	},
 	"repository": {
 		"type": "git",
@@ -30,6 +31,7 @@
 		"webpack": "^4.35.2",
 		"webpack-cli": "^3.3.5",
 		"webpack-dev-server": "^3.7.2",
-		"babel-loader": "^8.0.6"
+		"babel-loader": "^8.0.6",
+		"jest": "^24.8.0"
 	}
 }
