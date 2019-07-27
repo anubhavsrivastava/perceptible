@@ -3,7 +3,7 @@
 <div align="center">
 	<br/>
 	<br/>
-	<img width="128" height="128" src="media/perceptible.svg" alt="Perceptible">
+	<img width="128" height="128" src="media/perceptible.png" alt="Perceptible">
 	<br/>
     Perceptible
 	<br/>
