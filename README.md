@@ -20,11 +20,11 @@ Perceptible is highly configurable and easy to use.
 
 View the sample using `npm run sample`
 
-[![Build Status](https://travis-ci.org/anubhavsrivastava/perceptoble.svg?branch=master)](https://travis-ci.org/anubhavsrivastava/perceptoble)
-[![Coverage Status](https://coveralls.io/repos/github/anubhavsrivastava/perceptoble/badge.svg?branch=master)](https://coveralls.io/github/anubhavsrivastava/perceptoble?branch=master)
+[![Build Status](https://travis-ci.org/anubhavsrivastava/perceptible.svg?branch=master)](https://travis-ci.org/anubhavsrivastava/perceptible)
+[![Coverage Status](https://coveralls.io/repos/github/anubhavsrivastava/perceptible/badge.svg?branch=master)](https://coveralls.io/github/anubhavsrivastava/perceptible?branch=master)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![GitHub issues](https://img.shields.io/github/issues/anubhavsrivastava/perceptoble.svg?style=flat-square)](https://github.com/anubhavsrivastava/perceptoble/issues)
-[![HitCount](http://hits.dwyl.io/anubhavsrivastava/perceptoble.svg)](http://hits.dwyl.io/anubhavsrivastava/perceptoble)
+[![GitHub issues](https://img.shields.io/github/issues/anubhavsrivastava/perceptible.svg?style=flat-square)](https://github.com/anubhavsrivastava/perceptible/issues)
+[![HitCount](http://hits.dwyl.io/anubhavsrivastava/perceptible.svg)](http://hits.dwyl.io/anubhavsrivastava/perceptible)
 
 ## Use Cases
 
