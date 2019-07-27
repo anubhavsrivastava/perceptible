@@ -32,7 +32,7 @@ const config = {
 	plugins: [],
 	// OPTIONAL
 	// Reload On File Change
-	watch: true,
+	// watch: true,
 	// Development Tools (Map Errors To Source File)
 	devtool: 'source-map'
 };

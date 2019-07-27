@@ -12,7 +12,7 @@
 		"test:watch": "jest --watch",
 		"test:coverage": "jest --coverage",
 		"coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
-		"release": "npm run build && npx release-it"
+		"release": "npx release-it"
 	},
 	"repository": {
 		"type": "git",
