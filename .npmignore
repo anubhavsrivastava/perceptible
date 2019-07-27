@@ -2,6 +2,7 @@
 .travis.yml
 .vscode
 .gitignore
+.browserslistrc
 webpack.config.js
 src
 index.html

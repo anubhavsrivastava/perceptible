@@ -39,7 +39,8 @@
 		"jest": "^24.8.0",
 		"webpack": "^4.35.2",
 		"webpack-cli": "^3.3.5",
-		"webpack-dev-server": "^3.7.2"
-	},
-	"dependencies": {}
+		"webpack-dev-server": "^3.7.2",
+		"@babel/polyfill": "^7.4.4",
+		"@babel/register": "^7.5.5"
+	}
 }
