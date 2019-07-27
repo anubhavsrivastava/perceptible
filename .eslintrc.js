@@ -1,7 +1,8 @@
 module.exports = {
 	env: {
 		browser: true,
-		es6: true
+		es6: true,
+		'jest/globals': true
 	},
 	parserOptions: {
 		sourceType: 'module',
@@ -9,5 +10,5 @@ module.exports = {
 			experimentalObjectRestSpread: true
 		}
 	},
-	extends: 'eslint:recommended'
+	extends: ['eslint:recommended', 'plugin:jest/recommended']
 };
