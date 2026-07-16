@@ -20,7 +20,7 @@ Perceptible is highly configurable and easy to use.
 
 View the sample using `npm run sample`
 
-[![Build Status](https://travis-ci.org/anubhavsrivastava/perceptible.svg?branch=master)](https://travis-ci.org/anubhavsrivastava/perceptible)
+[![CI](https://github.com/anubhavsrivastava/perceptible/actions/workflows/ci.yml/badge.svg)](https://github.com/anubhavsrivastava/perceptible/actions/workflows/ci.yml)
 
 <!-- [![Coverage Status](https://coveralls.io/repos/github/anubhavsrivastava/perceptible/badge.svg?branch=master)](https://coveralls.io/github/anubhavsrivastava/perceptible?branch=master) -->
 
@@ -43,7 +43,7 @@ Entire documentation is available on [`perceptible.netlify.com`](https://percept
 
 ## Development
 
-For modernizing this codebase to Node 24, Vite, and Docusaurus v3, see the step-by-step task breakdown in [MIGRATION_TASKS.md](file:///Users/anubhav/Developer/perceptible/MIGRATION_TASKS.md).
+This project uses npm package manager and Vite as bundler.
 
 You may need to do `npm install` to get dependencies and `npm run build` to build latest bundle from Vite.
 View the sample using `npm run sample`
