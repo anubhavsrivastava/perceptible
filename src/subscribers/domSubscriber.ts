@@ -1,3 +1,5 @@
+import Perceptor, { SpectatorResult } from '../index';
+
 // This reporter requires DOM Element which will be Absolute display,
 const mainContainer = document.createElement('div');
 mainContainer.id = 'dreporter';
@@ -10,15 +12,15 @@ mainContainer.style.bottom = '0';
 mainContainer.style.left = '0';
 mainContainer.style.opacity = '0.8';
 
-var getHTMLPaintForObject = function(o) {
+const getHTMLPaintForObject = function(o: unknown): string {
 	return `<pre>${JSON.stringify(o, undefined, 4)}</pre>`;
 };
 
-const currentElementContainers = {};
+const currentElementContainers: Record<string, HTMLDivElement> = {};
 
 // Keeps track of elements already painted so that respective container are updated
 // Mapping ensures multiple Perceptors
-const createOrUpdateElementContainer = (id, context) => {
+const createOrUpdateElementContainer = (id: string, context: SpectatorResult): void => {
 	if (!currentElementContainers[id]) {
 		currentElementContainers[id] = document.createElement('div');
 		mainContainer.appendChild(currentElementContainers[id]);
@@ -31,6 +33,6 @@ const createOrUpdateElementContainer = (id, context) => {
  * @param {Perceptor} perceptorInstance
  * @param {SpectatorResult} context
  */
-export default (perceptorInstance, context) => {
+export default (perceptorInstance: Perceptor, context: SpectatorResult): void => {
 	return createOrUpdateElementContainer(perceptorInstance.element.id, context);
 };

@@ -1,11 +1,9 @@
 import Scheduler from './Scheduler';
 
-/* eslint-disable no-unused-vars */
-
 //This scheduler will watch on document events 'zoom', 'scroll', 'resize'
-//
 export default class DOMEventScheduler extends Scheduler {
-	constructor(options) {
+	constructor(options: any) { // eslint-disable-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+		super();
 		throw new Error('Not Implemented');
 	}
 }

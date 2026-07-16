@@ -12,6 +12,7 @@
     "perceptible": "^0.9.0"
   },
   "devDependencies": {
+    "typescript": "^7.0.2",
     "vite": "^5.0.0"
   }
 }

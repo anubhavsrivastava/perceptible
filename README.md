@@ -64,6 +64,29 @@ perceptor.subscribe((event) => {
 perceptor.watch();
 ```
 
+### TypeScript Support
+
+Perceptible includes full, native TypeScript support out of the box. Types such as `SpectatorResult`, `SubView`, and config models are exported directly from the package:
+
+```typescript
+import Perceptor, { SpectatorResult, Config } from 'perceptible';
+
+const element = document.querySelector('#target');
+if (element) {
+  const options: Partial<Config> = {
+    threshold: 50,
+    subscribers: [
+      (instance: Perceptor, data: SpectatorResult) => {
+        console.log('Visibility changed:', data.isVisible);
+      }
+    ]
+  };
+
+  const perceptor = new Perceptor(element, options);
+  perceptor.watch();
+}
+```
+
 ### Running the Example Application
 
 A complete Vite-based sample app demonstrating package usage is available in the [`example`](example) directory. To run it:

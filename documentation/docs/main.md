@@ -41,6 +41,28 @@ const observer = new Perceptor(document.querySelector('#target-element'), {
 observer.watch();
 ```
 
+## TypeScript Support
+
+Perceptible is written in TypeScript and provides native type definitions out of the box. No separate `@types/perceptible` installation is required.
+
+You can import types like `SpectatorResult`, `SubView`, and `Config` directly:
+
+```typescript
+import Perceptor, { SpectatorResult, Config } from 'perceptible';
+
+const options: Partial<Config> = {
+  threshold: 50,
+  subscribers: [
+    (instance: Perceptor, data: SpectatorResult) => {
+      console.log('Visibility:', data.isVisible);
+    }
+  ]
+};
+
+const observer = new Perceptor(element, options);
+observer.watch();
+```
+
 :::tip Production Ready
 Perceptible is stable and production-ready. Automated end-to-end and unit test suites are fully integrated to guarantee high-performance, zero-dependency viewability tracking.
 :::

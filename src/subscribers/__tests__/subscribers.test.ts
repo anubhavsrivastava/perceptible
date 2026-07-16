@@ -19,7 +19,7 @@ describe('Subscribers', () => {
 			const fn = jest.fn();
 
 			expect(manager.use(fn)).toBe(0);
-			expect(manager.use('invalid')).toBeNull();
+			expect(manager.use('invalid' as any)).toBeNull();
 		});
 
 		test('eject should clear subscriber at ID', () => {
@@ -27,8 +27,10 @@ describe('Subscribers', () => {
 			const fn = jest.fn();
 			const id = manager.use(fn);
 
-			manager.eject(id);
-			expect(manager.chain[id]).toBeNull();
+			if (id !== null) {
+				manager.eject(id);
+				expect(manager.chain[id]).toBeNull();
+			}
 		});
 
 		test('dispatch should invoke all registered subscribers with context and data', () => {
@@ -39,7 +41,7 @@ describe('Subscribers', () => {
 			manager.use(sub1);
 			manager.use(sub2);
 
-			const mockContext = { element: {} };
+			const mockContext = { element: {} } as any;
 			const mockData = { isVisible: true };
 
 			manager.dispatch(mockContext, mockData);
@@ -63,7 +65,7 @@ describe('Subscribers', () => {
 			expect(typeof sub).toBe('function');
 			expect(sub).not.toBe(domSubscriber);
 			expect(sub).not.toBe(consoleSubscriber);
-			expect(() => sub()).not.toThrow();
+			expect(() => (sub as any)()).not.toThrow();
 		});
 	});
 
@@ -72,12 +74,12 @@ describe('Subscribers', () => {
 			const dreporter = document.getElementById('dreporter');
 			expect(dreporter).not.toBeNull();
 
-			const instance = { element: { id: 'test-node' } };
+			const instance = { element: { id: 'test-node' } } as any;
 			const payload = { isVisible: true, surface: 100 };
 
 			domSubscriber(instance, payload);
 
-			const nodeContainer = dreporter.children[0];
+			const nodeContainer = dreporter!.children[0];
 			expect(nodeContainer).toBeDefined();
 			expect(nodeContainer.innerHTML).toContain('"isVisible": true');
 		});
@@ -86,7 +88,7 @@ describe('Subscribers', () => {
 	describe('consoleSubscriber', () => {
 		test('should log spectator result to console', () => {
 			const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
-			const instance = { element: {} };
+			const instance = { element: {} } as any;
 			const data = { time: 12345 };
 
 			consoleSubscriber(instance, data);

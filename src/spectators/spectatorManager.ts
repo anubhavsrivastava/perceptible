@@ -1,18 +1,29 @@
+import Perceptor, { SpectatorResult } from '../index';
+
+export type Spectator = (
+	context: Perceptor,
+	currentResult: Partial<SpectatorResult>,
+	prevResult: Partial<SpectatorResult>
+) => Partial<SpectatorResult> | void;
+
 /**
  * Manager for Spectators
  */
 export default class SpectatorManager {
-	constructor(chain) {
+	chain: Array<Spectator | null>;
+	prevResult: Partial<SpectatorResult>;
+
+	constructor(chain?: Array<Spectator | null>) {
 		this.chain = chain || [];
 		this.prevResult = {};
 	}
 
 	/**
 	 * Adds a spectator to list
-	 * @param {function} fn - Function to be added to chain of spectators
-	 * @returns {number} - Spectator ID
+	 * @param {Spectator} fn - Function to be added to chain of spectators
+	 * @returns {number | null} - Spectator ID
 	 */
-	use(fn) {
+	use(fn: Spectator): number | null {
 		if (typeof fn === 'function') {
 			this.chain.push(fn);
 			return this.chain.length - 1;
@@ -24,7 +35,7 @@ export default class SpectatorManager {
 	 * Removes previously added Spectator
 	 * @param {number} id - spectator ID
 	 */
-	eject(id) {
+	eject(id: number): void {
 		if (this.chain[id]) {
 			this.chain[id] = null;
 		}
@@ -32,11 +43,11 @@ export default class SpectatorManager {
 
 	/**
 	 * Executes every spectator and combines their result
-	 * @param {Perceptor} PerceptorContext
+	 * @param {Perceptor} perceptorContext
 	 * @returns {object} - Merged results from all spectators
 	 */
-	run(perceptorContext) {
-		const updatedResult = this.chain.reduce((currentResult, spectator) => {
+	run(perceptorContext: Perceptor): SpectatorResult {
+		const updatedResult = this.chain.reduce((currentResult: Partial<SpectatorResult>, spectator: Spectator | null) => {
 			if (spectator) {
 				// Combine result of previous Spectators with current spectator result
 				currentResult = Object.assign(currentResult, spectator(perceptorContext, currentResult, this.prevResult) || {});
@@ -44,6 +55,6 @@ export default class SpectatorManager {
 			return currentResult;
 		}, Object.assign({}, this.prevResult));
 		this.prevResult = updatedResult;
-		return updatedResult;
+		return updatedResult as SpectatorResult;
 	}
 }

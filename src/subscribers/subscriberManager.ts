@@ -1,17 +1,26 @@
+import Perceptor, { SpectatorResult } from '../index';
+
+export type Subscriber = (
+	context: Perceptor,
+	data: SpectatorResult
+) => void;
+
 /**
- * Manager for Spectators
+ * Manager for Subscribers
  */
 export default class SubscriberManager {
-	constructor(chain) {
+	chain: Array<Subscriber | null>;
+
+	constructor(chain?: Array<Subscriber | null>) {
 		this.chain = chain || [];
 	}
 
 	/**
 	 * Adds a subscriber to list
-	 * @param {function} fn - Function to be added to chain of subscribers
-	 * @returns {number} - Subscriber ID
+	 * @param {Subscriber} fn - Function to be added to chain of subscribers
+	 * @returns {number | null} - Subscriber ID
 	 */
-	use(fn) {
+	use(fn: Subscriber): number | null {
 		if (typeof fn === 'function') {
 			this.chain.push(fn);
 			return this.chain.length - 1;
@@ -23,7 +32,7 @@ export default class SubscriberManager {
 	 * Removes previously added subscriber
 	 * @param {number} id - Subscriber ID
 	 */
-	eject(id) {
+	eject(id: number): void {
 		if (this.chain[id]) {
 			this.chain[id] = null;
 		}
@@ -32,9 +41,9 @@ export default class SubscriberManager {
 	/**
 	 * Dispatcher to call all subscribers with payload
 	 * @param {Perceptor} PerceptorContext
-	 * @param {any} data - Additional payload for subscribers
+	 * @param {SpectatorResult} data - Additional payload for subscribers
 	 */
-	dispatch(PerceptorContext, data) {
+	dispatch(PerceptorContext: Perceptor, data: SpectatorResult): void {
 		this.chain.every(subscribe => {
 			if (subscribe) {
 				subscribe(PerceptorContext, data);

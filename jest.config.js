@@ -5,8 +5,9 @@ module.exports = {
 	clearMocks: true,
 	testEnvironment: 'jsdom',
 	transform: {
-		'^.+\\.js$': 'babel-jest'
+		'^.+\\.tsx?$': 'ts-jest',
+		'^.+\\.jsx?$': 'babel-jest'
 	},
-	testPathIgnorePatterns: ['/node_modules/', '/documentation/', '/media/', '/e2e/'],
+	testPathIgnorePatterns: ['/node_modules/', '/documentation/', '/media/', '/e2e/', '/dist/'],
 	transformIgnorePatterns: ['node_modules/(?!(@puppeteer|puppeteer|puppeteer-core)/)']
 };
