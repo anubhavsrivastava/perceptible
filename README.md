@@ -46,7 +46,7 @@ Full documentation is built with Docusaurus and available under the [`documentat
 
 ## Development & Testing
 
-This project uses Node.js (>=24) and Vite as its module bundler.
+This project uses Node.js (>=24) and Vite as its module bundler. For complete testing guidelines and agent instructions, refer to the [Testing Guide](TESTING.md).
 
 ### Installation & Scripts
 
