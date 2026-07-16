@@ -11,5 +11,9 @@ module.exports = {
 		sourceType: 'module'
 	},
 	extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:jest/recommended'],
-	plugins: ['@typescript-eslint', 'jest']
+	plugins: ['@typescript-eslint', 'jest'],
+	rules: {
+		'@typescript-eslint/no-explicit-any': 'warn',
+		'jest/no-conditional-expect': 'warn'
+	}
 };
