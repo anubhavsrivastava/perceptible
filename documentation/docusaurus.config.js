@@ -47,6 +47,10 @@ const config = {
     ({
       navbar: {
         title: 'Perceptible',
+        logo: {
+          alt: 'Perceptible Logo',
+          src: 'img/logo.png',
+        },
         items: [
           {
             type: 'docSidebar',

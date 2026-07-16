@@ -9,6 +9,13 @@ function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', 'text--center')}>
       <div className="container">
+        <img
+          src="/img/logo.png"
+          alt="Perceptible Logo"
+          width="120"
+          height="120"
+          style={{ marginBottom: '1.5rem', borderRadius: '24px', backgroundColor: '#ffffff', padding: '8px', boxShadow: '0 8px 16px rgba(0,0,0,0.15)' }}
+        />
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div style={{ margin: '2rem 0' }}>
