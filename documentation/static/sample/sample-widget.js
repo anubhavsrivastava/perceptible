@@ -72,10 +72,10 @@
             <span>Visible Duration:</span>
             <span class="metric-val">${durationSec}s</span>
           </div>
-          <details class="payload-inspector">
-            <summary>View JSON Payload</summary>
+          <div class="payload-inspector">
+            <div style="font-size: 0.75rem; color: #818cf8; font-weight: 600; margin-bottom: 4px;">JSON Payload:</div>
             <pre>${JSON.stringify(data, null, 2)}</pre>
-          </details>
+          </div>
         </div>
       `;
     });
