@@ -43,9 +43,9 @@ Entire documentation is available on [`perceptible.netlify.com`](https://percept
 
 ## Development
 
-This project uses npm package manager and WebPack as bundler.
+For modernizing this codebase to Node 22, Vite, and Docusaurus v3, see the step-by-step task breakdown in [MIGRATION_TASKS.md](file:///Users/anubhav/Developer/perceptible/MIGRATION_TASKS.md).
 
-You may need to do `npm install` to get dependencies and `npm run build` to build latest bundle from webpack.
+You may need to do `npm install` to get dependencies and `npm run build` to build latest bundle from Vite.
 View the sample using `npm run sample`
 
 Folder Structure:

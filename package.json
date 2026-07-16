@@ -3,16 +3,26 @@
 	"version": "0.0.4",
 	"description": "detect visibility of DOM Elements",
 	"main": "dist/bundle.js",
+	"module": "dist/bundle.mjs",
+	"types": "src/index.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/bundle.js",
+			"require": "./dist/bundle.umd.cjs"
+		}
+	},
+	"engines": {
+		"node": ">=22.0.0"
+	},
 	"scripts": {
-		"start": "webpack --watch",
-		"build": "webpack",
-		"sample": "npx http-server -o ",
-		"lint": "npx eslint ./src --config .eslintrc.js",
+		"start": "vite build --watch",
+		"build": "vite build",
+		"sample": "npx http-server -o",
+		"lint": "eslint ./src",
 		"test": "jest",
 		"test:watch": "jest --watch",
 		"test:coverage": "jest --coverage",
-		"coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
-		"release": "npx release-it"
+		"release": "release-it"
 	},
 	"repository": {
 		"type": "git",
@@ -28,19 +38,14 @@
 	},
 	"homepage": "https://github.com/anubhavsrivastava/perceptible#readme",
 	"devDependencies": {
-		"@babel/cli": "^7.5.0",
-		"@babel/core": "^7.5.0",
-		"@babel/preset-env": "^7.5.0",
-		"babel-loader": "^8.0.6",
-		"coveralls": "^3.0.5",
-		"eslint": "^6.1.0",
-		"eslint-plugin-jest": "^22.14.0",
-		"http-server": "^0.11.1",
-		"jest": "^24.8.0",
-		"webpack": "^4.35.2",
-		"webpack-cli": "^3.3.5",
-		"webpack-dev-server": "^3.7.2",
-		"@babel/polyfill": "^7.4.4",
-		"@babel/register": "^7.5.5"
+		"@babel/core": "^7.20.0",
+		"@babel/preset-env": "^7.20.0",
+		"babel-jest": "^30.4.1",
+		"eslint": "^8.0.0",
+		"eslint-plugin-jest": "^27.0.0",
+		"http-server": "^14.0.0",
+		"jest": "^29.0.0",
+		"jest-environment-jsdom": "^30.4.1",
+		"vite": "^5.0.0"
 	}
 }

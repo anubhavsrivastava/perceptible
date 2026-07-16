@@ -1,14 +1,13 @@
 module.exports = {
 	env: {
 		browser: true,
-		es6: true,
+		es2022: true,
+		node: true,
 		'jest/globals': true
 	},
 	parserOptions: {
-		sourceType: 'module',
-		ecmaFeatures: {
-			experimentalObjectRestSpread: true
-		}
+		ecmaVersion: 'latest',
+		sourceType: 'module'
 	},
 	extends: ['eslint:recommended', 'plugin:jest/recommended']
 };

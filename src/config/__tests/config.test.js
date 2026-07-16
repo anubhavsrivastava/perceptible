@@ -1,7 +1,7 @@
 import { mergeConfig } from '../helper';
 import baseConfig from '../defaultConfig';
 
-describe('Configuration Merger ', () => {
+describe('Configuration Merger', () => {
 	test('should provide a new configuration instance', () => {
 		let mergedConfig = mergeConfig(baseConfig, {});
 		expect(mergedConfig).not.toBe(baseConfig);
