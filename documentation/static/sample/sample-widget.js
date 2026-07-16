@@ -7,6 +7,14 @@
     document.body.appendChild(widgetContainer);
   }
 
+  // Create JSON Widget DOM Container
+  let jsonWidgetContainer = document.getElementById('perceptible-json-widget');
+  if (!jsonWidgetContainer) {
+    jsonWidgetContainer = document.createElement('div');
+    jsonWidgetContainer.id = 'perceptible-json-widget';
+    document.body.appendChild(jsonWidgetContainer);
+  }
+
   widgetContainer.innerHTML = `
     <div class="widget-header">
       <div class="widget-title">
@@ -18,8 +26,19 @@
     <div id="pw-elements-container"></div>
   `;
 
+  jsonWidgetContainer.innerHTML = `
+    <div class="widget-header">
+      <div class="widget-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M9 21V9h12"/><path d="M9 15h12"/><path d="M9 9h12"/></svg>
+        JSON Payload Monitor
+      </div>
+    </div>
+    <div id="pw-json-container"></div>
+  `;
+
   const focusBadge = document.getElementById('pw-focus-badge');
   const elementsContainer = document.getElementById('pw-elements-container');
+  const jsonContainer = document.getElementById('pw-json-container');
 
   // Handle Focus / Blur Status
   window.addEventListener('focus', function() {
@@ -48,6 +67,7 @@
   function renderWidget() {
     if (!elementsContainer) return;
     let html = '';
+    let jsonHtml = '';
 
     Object.keys(activeStores).forEach(id => {
       const data = activeStores[id] || {};
@@ -72,20 +92,24 @@
             <span>Visible Duration:</span>
             <span class="metric-val">${durationSec}s</span>
           </div>
-          <div class="payload-inspector">
-            <div style="font-size: 0.75rem; color: #818cf8; font-weight: 600; margin-bottom: 4px;">JSON Payload:</div>
-            <pre>${JSON.stringify(data, null, 2)}</pre>
-          </div>
+        </div>
+      `;
+
+      jsonHtml += `
+        <div class="payload-card">
+          <div class="element-id">#${id}</div>
+          <pre>${JSON.stringify(data, null, 2)}</pre>
         </div>
       `;
     });
 
     elementsContainer.innerHTML = html;
+    if (jsonContainer) {
+      jsonContainer.innerHTML = jsonHtml;
+    }
   }
 
   // Intercept domSubscriber calls to feed telemetry widget automatically
-  const originalMutation = MutationObserver;
-  // Polling check for #dreporter innerHTML updates if legacy subscriber is used
   setInterval(function() {
     const dreporter = document.getElementById('dreporter');
     if (dreporter && dreporter.children.length > 0) {
