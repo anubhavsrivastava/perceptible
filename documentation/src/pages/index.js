@@ -7,7 +7,7 @@ import Layout from '@theme/Layout';
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
   return (
-    <header className={clsx('hero hero--primary', 'text--center')}>
+    <header className={clsx('hero hero--primary', 'text--center')} style={{ minHeight: 'calc(100vh - 60px)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
       <div className="container">
         <img
           src="/img/logo.png"
@@ -30,6 +30,11 @@ function HomepageHeader() {
             to="/docs/examplemain">
             View Examples 💡
           </Link>
+        </div>
+        <div className="row" style={{ marginTop: '3rem' }}>
+          {FeatureList.map((props, idx) => (
+            <Feature key={idx} {...props} />
+          ))}
         </div>
       </div>
     </header>
@@ -54,7 +59,7 @@ const FeatureList = [
 function Feature({title, description}) {
   return (
     <div className={clsx('col col--4')}>
-      <div className="featureCard text--center padding-horiz--md margin-bottom--md">
+      <div className="featureCard text--center padding-horiz--md margin-bottom--md" style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(255, 255, 255, 0.2)' }}>
         <h3>{title}</h3>
         <p>{description}</p>
       </div>
@@ -69,15 +74,6 @@ export default function Home() {
       title={`${siteConfig.title} - ${siteConfig.tagline}`}
       description="Perceptible - High performance DOM element visibility tracking library">
       <HomepageHeader />
-      <main style={{ padding: '3rem 0' }}>
-        <section className="container">
-          <div className="row">
-            {FeatureList.map((props, idx) => (
-              <Feature key={idx} {...props} />
-            ))}
-          </div>
-        </section>
-      </main>
     </Layout>
   );
 }

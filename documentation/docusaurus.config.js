@@ -46,6 +46,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
+        style: 'primary',
         title: 'Perceptible',
         logo: {
           alt: 'Perceptible Logo',
