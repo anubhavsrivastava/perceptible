@@ -42,7 +42,51 @@ View the sample using `npm run sample`
 
 Full documentation is built with Docusaurus and available under the [`documentation`](documentation/docs) directory or hosted online at [`perceptible.netlify.app`](https://perceptible.netlify.app/).
 
+
+## Usage with Packages (Example App)
+
+For modern bundlers (like Vite, Webpack, or Rollup), you can import `perceptible` as an ESM/CommonJS module. 
+
+### Basic Usage
+
+```javascript
+import Perceptor from 'perceptible';
+
+const element = document.querySelector('#target');
+const perceptor = new Perceptor(element, {
+  threshold: 0.5 // trigger when 50% of the element is visible
+});
+
+perceptor.subscribe((event) => {
+  console.log('Element visibility changed:', event);
+});
+
+perceptor.watch();
+```
+
+### Running the Example Application
+
+A complete Vite-based sample app demonstrating package usage is available in the [`example`](example) directory. To run it:
+
+1. **Build the `perceptible` library** from the root directory:
+   ```bash
+   npm run build
+   ```
+2. **Navigate into the example directory**:
+   ```bash
+   cd example
+   ```
+3. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+4. **Start the Vite development server**:
+   ```bash
+   npm run dev
+   ```
+
 ---
+
 
 ## Development & Testing
 

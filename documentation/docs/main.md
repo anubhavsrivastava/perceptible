@@ -41,8 +41,8 @@ const observer = new Perceptor(document.querySelector('#target-element'), {
 observer.watch();
 ```
 
-:::warning Production Notice
-Use in production environments is currently in preview as pre-v1.0 enhancements are underway. Primary automated testing target is Google Chrome.
+:::tip Production Ready
+Perceptible is stable and production-ready. Automated end-to-end and unit test suites are fully integrated to guarantee high-performance, zero-dependency viewability tracking.
 :::
 
 ## Next Steps
