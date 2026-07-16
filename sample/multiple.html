@@ -1,43 +1,33 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<style>
-			body {
-				height: 2000px;
-				width: 2500px;
-			}
-			#testDiv,
-			#testDiv2 {
-				width: 300px;
-				height: 250px;
-				color: #fff;
-				padding: 20px;
-				background: #6c63ff;
-				position: relative;
-				left: 100px;
-				top: 100px;
-			}
-			#testDiv2 {
-				left: 500px;
-			}
-		</style>
+		<meta charset="UTF-8" />
+		<title>Perceptible - Multiple Targets Example</title>
+		<link rel="stylesheet" href="sample-theme.css" />
 	</head>
-	<body>
-		<div id="testDiv">
-			Element To Track
+	<body style="height:2500px;">
+		<div class="sample-header">
+			<h1>Multiple Target Tracking</h1>
+			<p>Observe independent state updates for two separate elements as you scroll down the page.</p>
 		</div>
-		<div id="space" style="height:600px;">
-			Other elements
+
+		<div id="testDiv" class="trackable-box" style="width: 320px; height: 180px; margin-top: 30px;">
+			First Tracked Element (#testDiv)
 		</div>
-		<div id="testDiv2">
-			Element To Track
+
+		<div style="height: 600px;"></div>
+
+		<div id="testDiv2" class="trackable-box" style="width: 320px; height: 180px;">
+			Second Tracked Element (#testDiv2)
 		</div>
+
+		<script src="../dist/bundle.js"></script>
+		<script src="sample-widget.js"></script>
+		<script>
+			var t1 = new Perceptor(document.querySelector('#testDiv'));
+			t1.watch();
+			var t2 = new Perceptor(document.querySelector('#testDiv2'));
+			t2.watch();
+		</script>
 	</body>
-	<script src="../dist/bundle.js"></script>
-	<script>
-		var t1 = new Perceptor(document.querySelector('#testDiv'));
-		t1.watch();
-		var t2 = new Perceptor(document.querySelector('#testDiv2'));
-		t2.watch();
-	</script>
 </html>

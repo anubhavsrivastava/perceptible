@@ -2,65 +2,44 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<title>Perceptor - Basic Sample</title>
-		<style>
-			body {
-				height: 2000px;
-				width: 2500px;
-			}
-			#testdiv {
-				padding: 20px;
-				width: 300px;
-				height: 250px;
-				background: #6c63ff;
-				position: relative;
-				left: 100px;
-				top: 100px;
-			}
-
-			#output {
-				padding: 10px;
-				background-color: green;
-				color: #fff;
-				width: 150px;
-				height: 30px;
-				text-align: center;
-			}
-
-			.float {
-				position: fixed;
-				bottom: 0;
-				right: 0;
-			}
-		</style>
+		<title>Perceptible - Watch / Unwatch Lifecycle Example</title>
+		<link rel="stylesheet" href="sample-theme.css" />
 	</head>
-	<body style="height:2000px;">
-		<div id="testdiv">
-			Element to Track
+	<body style="height:2200px;">
+		<div class="sample-header">
+			<h1>Watch / Unwatch Lifecycle Example</h1>
+			<p>Click the fixed floating toggle button to pause (`unwatch()`) or resume (`watch()`) active evaluation loops on demand.</p>
 		</div>
-		<div id="output" class="float">
-			Click here to toggle watch mode
-		</div>
-	</body>
 
-	<script src="../dist/bundle.js"></script>
-	<script>
-		var outputContainer = document.getElementById('output');
-		var watchMode = true;
-		var tObserve = new Perceptor(document.querySelector('#testdiv'), { threshold: 50, defaultSubscriber: 'dom' });
-		tObserve.watch();
-		outputContainer.addEventListener('click', () => {
-			if (watchMode) {
-				outputContainer.style.background = 'red';
-				tObserve.unwatch();
-				watchMode = false;
-			} else {
-				outputContainer.style.background = 'green';
-				tObserve.watch();
-				watchMode = true;
-			}
-		});
-	</script>
+		<div id="testdiv" class="trackable-box" style="width: 320px; height: 200px; margin-top: 30px;">
+			Target Element (#testdiv)
+		</div>
+
+		<div id="output" style="position: fixed; bottom: 24px; left: 24px; padding: 12px 20px; border-radius: 12px; font-weight: 600; background: #10b981; color: #fff; z-index: 999; cursor: pointer; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+			Status: WATCHING (Click to Unwatch)
+		</div>
+
+		<script src="../dist/bundle.js"></script>
+		<script src="sample-widget.js"></script>
+		<script>
+			var outputContainer = document.getElementById('output');
+			var watchMode = true;
+			var tObserve = new Perceptor(document.querySelector('#testdiv'), { threshold: 50, defaultSubscriber: 'dom' });
+			tObserve.watch();
+
+			outputContainer.addEventListener('click', () => {
+				if (watchMode) {
+					outputContainer.style.background = '#ef4444';
+					outputContainer.innerText = 'Status: UNWATCHED (Click to Watch)';
+					tObserve.unwatch();
+					watchMode = false;
+				} else {
+					outputContainer.style.background = '#10b981';
+					outputContainer.innerText = 'Status: WATCHING (Click to Unwatch)';
+					tObserve.watch();
+					watchMode = true;
+				}
+			});
+		</script>
+	</body>
 </html>

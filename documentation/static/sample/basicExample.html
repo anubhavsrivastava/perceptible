@@ -3,18 +3,24 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<title>Perceptor - Basic Sample</title>
+		<title>Perceptible - Basic Sample</title>
+		<link rel="stylesheet" href="sample-theme.css" />
 	</head>
-	<body style="height:2000px;">
-		<div id="testdiv" style="color:#fff;background:#6c63ff;height:100px;width:100px;">
-			Element to Track
+	<body style="height:2200px;">
+		<div class="sample-header">
+			<h1>Basic Viewability Example</h1>
+			<p>Scroll down to observe real-time surface percentage and duration tracking in the Live Telemetry Widget.</p>
 		</div>
-	</body>
 
-	<script src="../dist/bundle.js"></script>
-	<script>
-		var tObserve = new Perceptor(document.querySelector('#testdiv'));
-		tObserve.watch();
-	</script>
+		<div id="testdiv" class="trackable-box" style="height:150px;width:250px;margin-top:40px;">
+			Target Element (#testdiv)
+		</div>
+
+		<script src="../dist/bundle.js"></script>
+		<script src="sample-widget.js"></script>
+		<script>
+			var tObserve = new Perceptor(document.querySelector('#testdiv'));
+			tObserve.watch();
+		</script>
+	</body>
 </html>

@@ -2,65 +2,49 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<title>Perceptor - Basic Sample</title>
-		<style>
-			body {
-				height: 2000px;
-				width: 2500px;
-			}
-			#testdiv {
-				padding: 20px;
-				width: 300px;
-				height: 250px;
-				background: #6c63ff;
-				position: relative;
-				left: 100px;
-				top: 100px;
-			}
-
-			#testcontainer {
-				padding: 10px;
-				color: #fff;
-				width: 100px;
-				height: 50px;
-				background: #900099;
-			}
-
-			.float {
-				position: fixed;
-				bottom: 200px;
-			}
-		</style>
+		<title>Perceptible - Custom Spectator Example</title>
+		<link rel="stylesheet" href="sample-theme.css" />
 	</head>
-	<body style="height:2000px;">
-		<div id="testdiv">
-			Element to Track
-			<div id="testcontainer">
-				Click on me and scroll
+	<body style="height:2200px;">
+		<div class="sample-header">
+			<h1>Custom Spectator Example</h1>
+			<p>Custom spectators extend the spectator pipeline. Click the child box to toggle fixed floating mode and override visibility logic.</p>
+		</div>
+
+		<div id="testdiv" class="trackable-box" style="width: 320px; height: 220px; margin-top: 30px;">
+			Target Element (#testdiv)
+			<br /><br />
+			<div id="testcontainer" style="padding: 12px; background: rgba(168, 85, 247, 0.3); border: 1px solid rgba(168, 85, 247, 0.5); border-radius: 8px; cursor: pointer;">
+				Click me to toggle float mode
 			</div>
 		</div>
-	</body>
 
-	<script src="../dist/bundle.js"></script>
-	<script>
-		var testContainer = document.getElementById('testcontainer');
-		testContainer.addEventListener('click', function() {
-			this.classList.toggle('float');
-			//This will make the inner element always visbile if 'float' is added
-		});
-
-		var customSpectator = function(perceptor, currentResult, prevResult) {
-			//if float is present in child DOM, it should be reported as visibile
-			if (document.getElementById('testcontainer').classList.contains('float')) {
-				currentResult.isVisible = true;
-				if (currentResult.isVisible && prevResult.isVisible) {
-					currentResult.duration += perceptor.config.scheduler.interval;
+		<script src="../dist/bundle.js"></script>
+		<script src="sample-widget.js"></script>
+		<script>
+			var testContainer = document.getElementById('testcontainer');
+			testContainer.addEventListener('click', function() {
+				this.classList.toggle('float');
+				if (this.classList.contains('float')) {
+					this.style.position = 'fixed';
+					this.style.bottom = '200px';
+					this.style.right = '400px';
+					this.style.zIndex = '999';
+				} else {
+					this.style.position = 'static';
 				}
-			}
-		};
-		var tObserve = new Perceptor(document.querySelector('#testdiv'), { spectators: [customSpectator] });
-		tObserve.watch();
-	</script>
+			});
+
+			var customSpectator = function(perceptor, currentResult, prevResult) {
+				if (document.getElementById('testcontainer').classList.contains('float')) {
+					currentResult.isVisible = true;
+					if (currentResult.isVisible && prevResult.isVisible) {
+						currentResult.duration += perceptor.config.scheduler.interval;
+					}
+				}
+			};
+			var tObserve = new Perceptor(document.querySelector('#testdiv'), { spectators: [customSpectator] });
+			tObserve.watch();
+		</script>
+	</body>
 </html>

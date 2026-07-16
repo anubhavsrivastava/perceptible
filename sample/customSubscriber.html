@@ -2,63 +2,43 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<title>Perceptor - Basic Sample</title>
-		<style>
-			body {
-				height: 2000px;
-				width: 2500px;
-			}
-			#testdiv {
-				padding: 20px;
-				width: 300px;
-				height: 250px;
-				background: #6c63ff;
-				position: relative;
-				left: 100px;
-				top: 100px;
-			}
-
-			#output {
-				padding: 10px;
-				color: #fff;
-				width: 150px;
-				height: 30px;
-				text-align: center;
-			}
-
-			.float {
-				position: fixed;
-				bottom: 0;
-				right: 0;
-			}
-		</style>
+		<title>Perceptible - Custom Subscriber Example</title>
+		<link rel="stylesheet" href="sample-theme.css" />
 	</head>
-	<body style="height:2000px;">
-		<div id="testdiv">
-			Element to Track
+	<body style="height:2200px;">
+		<div class="sample-header">
+			<h1>Custom Subscriber Example</h1>
+			<p>Custom subscribers receive dispatch updates. Scroll to see the custom indicator change background color dynamically based on surface area boundaries.</p>
 		</div>
-		<div id="output" class="float">
-			Visibility Indicator (scroll to check)
+
+		<div id="testdiv" class="trackable-box" style="width: 320px; height: 200px; margin-top: 30px;">
+			Target Element (#testdiv)
 		</div>
+
+		<div id="output" style="position: fixed; bottom: 24px; left: 24px; padding: 12px 20px; border-radius: 12px; font-weight: 600; background: #334155; color: #fff; z-index: 999; border: 1px solid rgba(255,255,255,0.2);">
+			Visibility Indicator (Scroll Page)
+		</div>
+
+		<script src="../dist/bundle.js"></script>
+		<script src="sample-widget.js"></script>
+		<script>
+			var outputContainer = document.getElementById('output');
+
+			var customSubscriber = function(pContext, result) {
+				var surface = result.subView ? result.subView.surface || 0 : 0;
+				if (surface < 20) {
+					outputContainer.style.background = '#ef4444';
+					outputContainer.innerText = 'Surface < 20% (Low)';
+				} else if (surface >= 20 && surface < 50) {
+					outputContainer.style.background = '#f59e0b';
+					outputContainer.innerText = 'Surface 20-50% (Medium)';
+				} else if (surface >= 50) {
+					outputContainer.style.background = '#10b981';
+					outputContainer.innerText = 'Surface >= 50% (High)';
+				}
+			};
+			var tObserve = new Perceptor(document.querySelector('#testdiv'), { threshold: 50, defaultSubscriber: 'dom', subscribers: [customSubscriber] });
+			tObserve.watch();
+		</script>
 	</body>
-
-	<script src="../dist/bundle.js"></script>
-	<script>
-		var outputContainer = document.getElementById('output');
-
-		var customSubscriber = function(pContext, result) {
-			var surface = result.subView.surface || 0;
-			if (surface < 20) {
-				outputContainer.style.background = 'red';
-			} else if (surface > 20 && surface < 50) {
-				outputContainer.style.background = 'orange';
-			} else if (surface > 50) {
-				outputContainer.style.background = 'green';
-			}
-		};
-		var tObserve = new Perceptor(document.querySelector('#testdiv'), { threshold: 50, defaultSubscriber: 'none', subscribers: [customSubscriber] });
-		tObserve.watch();
-	</script>
 </html>

@@ -1,57 +1,35 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Ad Detection</title>
-		<style>
-			body {
-				height: 2000px;
-				width: 2500px;
-			}
-			#ad {
-				width: 300px;
-				height: 250px;
-				background: #ee7202;
-				position: relative;
-				left: 100px;
-				top: 100px;
-			}
-		</style>
+		<meta charset="UTF-8" />
+		<title>Perceptible - Ad Impression Telemetry</title>
+		<link rel="stylesheet" href="sample-theme.css" />
 	</head>
-	<body>
-		<div id="ad">
-			ADVERTISEMENT
+	<body style="height:2200px;">
+		<div class="sample-header">
+			<h1>Ad Impression Telemetry Example</h1>
+			<p>Measures MRC ad compliance (100% surface threshold). Click the element or inspect the telemetry panel for exact duration telemetry.</p>
 		</div>
+
+		<div id="ad" class="trackable-box" style="width: 320px; height: 220px; margin-top: 30px; border-color: rgba(245, 158, 11, 0.4); cursor: pointer;">
+			ADVERTISEMENT (#ad)
+			<br /><br />
+			<div style="font-size: 0.85rem; color: #fde68a;">Click element to trigger impression event</div>
+		</div>
+
+		<script src="../dist/bundle.js"></script>
+		<script src="sample-widget.js"></script>
+		<script>
+			var clickCount = 0;
+			var t1 = new Perceptor(document.querySelector('#ad'), {
+				threshold: 100,
+				scheduler: { interval: 500 },
+				clickHandler: function(e, f) {
+					clickCount++;
+					console.log('Ad click count:', clickCount);
+				}
+			});
+			t1.watch();
+		</script>
 	</body>
-	<script src="../dist/bundle.js"></script>
-
-	<script>
-		var clickCount = 0;
-		var t1 = new Perceptor(document.querySelector('#ad'), {
-			threshold: 100, // %visibility to count as visible
-			scheduler: { interval: 500 },
-			clickHandler: function(e, f) {
-				clickCount++;
-				console.log('Ad was click:', clickCount, ' time(s)');
-			}
-		});
-		t1.watch();
-
-		// Reports on DOM
-		// {
-		// 	"time": 1563740162880,
-		// 	"element": {
-		// 		"id": "ad",
-		// 		"tagName": "DIV"
-		// 	},
-		// 	"isVisible": false,  //Whether element is visible (by threshold)
-		// 	"subView": {
-		// 		"left": 365,
-		// 		"right": 408,
-		// 		"top": 108,
-		// 		"bottom": 358,
-		// 		"surface": 14.33 //surface area (%) visible
-		// 	},
-		// 	"duration": 20500 // duration in ms that the ad was visible
-		// }
-	</script>
 </html>

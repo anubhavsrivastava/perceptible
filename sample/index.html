@@ -1,53 +1,39 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Perceptor Examples</title>
-		<style>
-			body {
-				height: 2000px;
-				width: 2500px;
-			}
-			#ad,
-			#ad2 {
-				width: 300px;
-				height: 250px;
-				background: #6c63ff;
-				position: relative;
-				left: 100px;
-				top: 100px;
-			}
-			#ad2 {
-				left: 500px;
-			}
-		</style>
+		<meta charset="UTF-8" />
+		<title>Perceptible - Overview Samples</title>
+		<link rel="stylesheet" href="sample-theme.css" />
 	</head>
-	<body>
-		<div id="ad">
-			ADVERTISEMENT
+	<body style="height:2500px;">
+		<div class="sample-header">
+			<h1>Multiple Ad Telemetry Demonstration</h1>
+			<p>Observe dual targets being tracked concurrently across scroll positions in the live floating widget.</p>
 		</div>
-		<div id="fad" style="height:600px;">
-			space
-		</div>
-		<div id="ad2">
-			ADVERTISEMENT
-		</div>
-	</body>
-	<script src="../dist/bundle.js"></script>
-	<script>
-		window.log = console.log.bind(console);
-		function printStatus() {
-			if (typeof window.log === 'function') {
-				window.log();
-			}
 
-			setTimeout(printStatus, 500);
-		}
-		window.clickCount = 0;
-		var t = new Perceptor(document.querySelector('#ad'), {
-			clickHandler: function(e, f) {
-				window.log(e, f, clickCount++);
-			}
-		});
-		t.watch();
-	</script>
+		<div id="ad" class="trackable-box" style="width: 320px; height: 200px; margin-top: 30px;">
+			Target 1 (#ad)
+		</div>
+
+		<div style="height: 600px;"></div>
+
+		<div id="ad2" class="trackable-box" style="width: 320px; height: 200px;">
+			Target 2 (#ad2)
+		</div>
+
+		<script src="../dist/bundle.js"></script>
+		<script src="sample-widget.js"></script>
+		<script>
+			window.clickCount = 0;
+			var t1 = new Perceptor(document.querySelector('#ad'), {
+				clickHandler: function() {
+					window.clickCount++;
+				}
+			});
+			t1.watch();
+
+			var t2 = new Perceptor(document.querySelector('#ad2'));
+			t2.watch();
+		</script>
+	</body>
 </html>

@@ -1,42 +1,36 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Perceptor Examples</title>
-		<style>
-			body {
-				height: 2000px;
-				width: 2500px;
-			}
-			#testDiv {
-				width: 300px;
-				height: 250px;
-				color: #fff;
-				padding: 20px;
-				background: #6c63ff;
-				position: relative;
-				left: 100px;
-				top: 100px;
-			}
-		</style>
+		<meta charset="UTF-8" />
+		<title>Perceptible - Click Interaction Tracking</title>
+		<link rel="stylesheet" href="sample-theme.css" />
 	</head>
-	<body>
-		<div id="testDiv">
-			Element To Track
-
-			<br />
-			<span> click count </span>
-			<span id="count">0 </span>
+	<body style="height:2200px;">
+		<div class="sample-header">
+			<h1>Click Interaction Tracking Example</h1>
+			<p>Click on the target element below to trigger the custom <code>clickHandler</code> callback and inspect telemetry metrics.</p>
 		</div>
+
+		<div id="testDiv" class="trackable-box" style="width: 300px; height: 180px; margin-top: 40px; cursor: pointer;">
+			Target Element (#testDiv)
+			<br /><br />
+			<div style="background: rgba(99, 102, 241, 0.2); padding: 10px; border-radius: 8px; border: 1px dashed rgba(99,102,241,0.4);">
+				<span>Click Count: </span>
+				<span id="count" style="font-weight: 700; color: #a5f3fc;">0</span>
+			</div>
+		</div>
+
+		<script src="../dist/bundle.js"></script>
+		<script src="sample-widget.js"></script>
+		<script>
+			var clickCount = 0;
+			var t1 = new Perceptor(document.querySelector('#testDiv'), {
+				clickHandler: function(e, f) {
+					clickCount++;
+					document.getElementById('count').innerText = clickCount;
+				}
+			});
+			t1.watch();
+		</script>
 	</body>
-	<script src="../dist/bundle.js"></script>
-	<script>
-		var clickCount = 0;
-		var t1 = new Perceptor(document.querySelector('#testDiv'), {
-			clickHandler: function(e, f) {
-				clickCount++;
-				document.getElementById('count').innerText = clickCount;
-			}
-		});
-		t1.watch();
-	</script>
 </html>

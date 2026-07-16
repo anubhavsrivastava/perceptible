@@ -1,45 +1,34 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Perceptor Examples</title>
-		<style>
-			body {
-				height: 2000px;
-				width: 2500px;
-			}
-			#testDiv,
-			#testDiv2 {
-				width: 300px;
-				height: 250px;
-				color: #fff;
-				padding: 20px;
-				background: #6c63ff;
-				position: relative;
-				left: 100px;
-				top: 100px;
-			}
-			#testDiv2 {
-				left: 500px;
-			}
-		</style>
+		<meta charset="UTF-8" />
+		<title>Perceptor - Multi Configuration Example</title>
+		<link rel="stylesheet" href="sample-theme.css" />
 	</head>
-	<body>
-		<div id="testDiv">
-			Element To Track
+	<body style="height:2500px;">
+		<div class="sample-header">
+			<h1>Multi Configuration Example</h1>
+			<p>Demonstrates global <code>Perceptor.defaults</code> configuration overriding alongside instance-level custom intervals (500ms vs 1000ms).</p>
 		</div>
-		<div id="space" style="height:600px;">
-			Other elements
+
+		<div id="testDiv" class="trackable-box" style="width: 320px; height: 180px; margin-top: 30px;">
+			Element 1 (#testDiv) &bull; 500ms Interval
 		</div>
-		<div id="testDiv2">
-			Element To Track
+
+		<div style="height: 600px;"></div>
+
+		<div id="testDiv2" class="trackable-box" style="width: 320px; height: 180px;">
+			Element 2 (#testDiv2) &bull; 1000ms Interval
 		</div>
+
+		<script src="../dist/bundle.js"></script>
+		<script src="sample-widget.js"></script>
+		<script>
+			Perceptor.defaults.threshold = 50;
+			var t1 = new Perceptor(document.querySelector('#testDiv'), { scheduler: { interval: 500 } });
+			t1.watch();
+			var t2 = new Perceptor(document.querySelector('#testDiv2'), { scheduler: { interval: 1000 } });
+			t2.watch();
+		</script>
 	</body>
-	<script src="../dist/bundle.js"></script>
-	<script>
-		Perceptor.defaults.threshold = 50;
-		var t1 = new Perceptor(document.querySelector('#testDiv'), { scheduler: { interval: 500 } });
-		t1.watch();
-		var t2 = new Perceptor(document.querySelector('#testDiv2'), { scheduler: { interval: 1000 } });
-		t2.watch();
-	</script>
 </html>

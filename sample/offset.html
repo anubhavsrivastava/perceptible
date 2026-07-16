@@ -1,54 +1,38 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Perceptor Examples</title>
-		<style>
-			body {
-				height: 2000px;
-				width: 2500px;
-			}
-			#testDiv,
-			#testDiv2 {
-				width: 300px;
-				height: 250px;
-				color: #fff;
-				padding: 20px;
-				background: #6c63ff;
-				position: relative;
-				left: 100px;
-				top: 100px;
-			}
-			#testDiv2 {
-				left: 500px;
-			}
-			#header {
-				height: 150px;
-				width: 100%;
-				background: black;
-				position: sticky;
-				top: 0;
-				z-index: 10;
-			}
-		</style>
+		<meta charset="UTF-8" />
+		<title>Perceptible - View Offset Bounds Example</title>
+		<link rel="stylesheet" href="sample-theme.css" />
 	</head>
-	<body>
-		<div id="header"></div>
+	<body style="height:2500px;">
+		<!-- Fixed Top Header Navigation Bar to demonstrate viewOffset -->
+		<div id="sticky-header" style="height: 140px; width: 100%; background: rgba(15, 23, 42, 0.95); border-bottom: 2px solid #6366f1; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(12px);">
+			<span style="font-weight: 700; color: #818cf8;">Sticky Header Boundary Area (140px Height - Top View Offset)</span>
+		</div>
 
-		<div id="testDiv">
-			Element Not Tracked (scroll down)
+		<div class="sample-header" style="margin-top: 30px;">
+			<h1>View Offset Boundaries Example</h1>
+			<p>Target 2 configures <code>viewOffset: { top: 140 }</code> to prevent sticky headers from improperly triggering viewability.</p>
 		</div>
-		<div id="space" style="height:600px;">
-			Other elements
+
+		<div id="testDiv" class="trackable-box" style="width: 320px; height: 180px; margin-top: 30px; opacity: 0.5;">
+			Element Not Using Offset (#testDiv)
 		</div>
-		<div id="testDiv2">
-			Element To Track
+
+		<div style="height: 500px;"></div>
+
+		<div id="testDiv2" class="trackable-box" style="width: 320px; height: 180px;">
+			Target Using viewOffset: { top: 140 } (#testDiv2)
 		</div>
+
+		<script src="../dist/bundle.js"></script>
+		<script src="sample-widget.js"></script>
+		<script>
+			var t = new Perceptor(document.querySelector('#testDiv2'), {
+				viewOffset: { top: 140 }
+			});
+			t.watch();
+		</script>
 	</body>
-	<script src="../dist/bundle.js"></script>
-	<script>
-		var t = new Perceptor(document.querySelector('#testDiv2'), {
-			viewOffset: { top: 150 }
-		});
-		t.watch();
-	</script>
 </html>
