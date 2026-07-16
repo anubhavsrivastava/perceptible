@@ -7,5 +7,6 @@ module.exports = {
 	transform: {
 		'^.+\\.js$': 'babel-jest'
 	},
-	testPathIgnorePatterns: ['/node_modules/', '/documentation/', '/media/']
+	testPathIgnorePatterns: ['/node_modules/', '/documentation/', '/media/', '/e2e/'],
+	transformIgnorePatterns: ['node_modules/(?!(@puppeteer|puppeteer|puppeteer-core)/)']
 };

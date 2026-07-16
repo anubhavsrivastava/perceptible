@@ -6,10 +6,10 @@ This guide provides testing standards, patterns, and conventions for AI agents a
 
 ## 1. Overview & Tech Stack
 
-Perceptible uses **Jest** with the **JSDOM** test environment (`jest-environment-jsdom`) and Babel ES module transformations (`babel-jest`).
+Perceptible uses **Jest** with the **JSDOM** test environment (`jest-environment-jsdom`) for unit testing, and **Puppeteer** for automated browser end-to-end (E2E) visual and interaction testing in real Chromium contexts.
 
-- **Test Runner**: Jest
-- **Environment**: JSDOM (Simulated Browser DOM)
+- **Unit Test Runner**: Jest (JSDOM Environment)
+- **Browser E2E Runner**: Jest + Puppeteer (Headless Chromium)
 - **Transform**: Babel (ES6 Modules -> CommonJS)
 - **Target Coverage**: >90% statement coverage
 
@@ -20,7 +20,7 @@ Perceptible uses **Jest** with the **JSDOM** test environment (`jest-environment
 Run the following npm scripts from the root directory:
 
 ```bash
-# Execute unit test suite
+# Execute unit test suite (JSDOM)
 npm run test
 
 # Execute unit tests in watch mode
@@ -28,24 +28,29 @@ npm run test:watch
 
 # Generate code coverage report
 npm run test:coverage
+
+# Execute automated browser tests (Puppeteer / Chromium)
+npm run test:e2e
 ```
 
 ---
 
 ## 3. Test File Conventions & Location
 
-All unit tests are located within `__tests__` directories co-located with the source code:
+- **Unit Tests**: Co-located within `__tests__` subdirectories in `src/`:
+  - `src/__tests__/index.test.js` - Main `Perceptor` engine class tests.
+  - `src/config/__tests/config.test.js` - Configuration merger and defaultConfig tests.
+  - `src/utils/__tests__/view.test.js` - DOM element bounding & viewport position math tests.
+  - `src/spectators/__tests__/spectators.test.js` - SpectatorManager and spectator logic tests.
+  - `src/subscribers/__tests__/subscribers.test.js` - SubscriberManager and subscriber tests.
+  - `src/schedulers/__tests__/schedulers.test.js` - IntervalScheduler & Page Visibility tests.
 
-- `src/__tests__/index.test.js` - Main `Perceptor` engine class tests.
-- `src/config/__tests/config.test.js` - Configuration merger and defaultConfig tests.
-- `src/utils/__tests__/view.test.js` - DOM element bounding & viewport position math tests.
-- `src/spectators/__tests__/spectators.test.js` - SpectatorManager and individual spectator tests.
-- `src/subscribers/__tests__/subscribers.test.js` - SubscriberManager and default subscriber tests.
-- `src/schedulers/__tests__/schedulers.test.js` - IntervalScheduler, base Scheduler, and visibility helper tests.
+- **Browser E2E Tests**: Located in `e2e/`:
+  - `e2e/browser.test.js` - Puppeteer browser integration tests running in real Chromium windows.
 
 ---
 
-## 4. Key Testing Patterns & Mocking Strategies
+## 4. Key Unit Testing Patterns & Mocking Strategies
 
 ### 4.1 Mocking DOM Geometry & Viewport Dimensions
 
@@ -104,12 +109,74 @@ window.dispatchEvent(new Event('focus'));
 
 ---
 
-## 5. Rules & Guidelines for AI Agents
+## 5. Automated Browser Testing with Puppeteer
 
-When implementing or modifying code and writing tests:
+Browser E2E tests validate real browser engine behavior, CSS box rendering, viewport scroll intersection, dynamic `#dreporter` UI injection, and event dispatching.
 
-1. **Never suppress tests**: Do not comment out failing assertions or delete test suites to force a build pass.
-2. **Verify DOM Element validation**: Ensure every test creating a `Perceptor` instance passes a valid `Element` constructed via `document.createElement()`.
-3. **Clean up DOM side effects**: Remove test DOM elements in `afterEach` or `afterAll` blocks.
-4. **Mock console methods**: When testing `consoleSubscriber`, spy on `console.log` and clean it up using `.mockRestore()`.
-5. **Run Verification Commands**: Always execute `npm run test` and `npm run test:coverage` to confirm all assertions pass cleanly before completing a task.
+### 5.1 Structure of a Puppeteer Test File
+
+Add `/** @jest-environment node */` docblock at the top of Puppeteer test files so Jest runs them in Node.js instead of JSDOM:
+
+```js
+/**
+ * @jest-environment node
+ */
+
+import path from 'path';
+import puppeteer from 'puppeteer';
+
+describe('Browser E2E Tests', () => {
+    let browser;
+    let page;
+
+    beforeAll(async () => {
+        browser = await puppeteer.launch({
+            headless: 'new',
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
+    }, 30000);
+
+    afterAll(async () => {
+        if (browser) await browser.close();
+    });
+
+    beforeEach(async () => {
+        page = await browser.newPage();
+        await page.setViewport({ width: 1024, height: 768 });
+    });
+
+    afterEach(async () => {
+        if (page) await page.close();
+    });
+
+    test('should track viewport scrolling in real Chromium', async () => {
+        const samplePath = path.resolve(__dirname, '../sample/basicExample.html');
+        await page.goto(`file://${samplePath}`, { waitUntil: 'load' });
+
+        // Evaluate browser page context
+        const exists = await page.evaluate(() => typeof window.Perceptor === 'function');
+        expect(exists).toBe(true);
+
+        // Perform scroll in real browser window
+        await page.evaluate(() => window.scrollTo(0, 1000));
+
+        // Wait for scheduler interval tick
+        await new Promise(r => setTimeout(r, 600));
+
+        const text = await page.evaluate(() => document.getElementById('dreporter').innerText);
+        expect(text).toContain('"isVisible": false');
+    });
+});
+```
+
+---
+
+## 6. Guidelines & Rules for AI Agents
+
+When implementing features or modifying tests:
+
+1. **Keep Unit & E2E Tests Distinct**: Unit tests live in `src/**/__tests__` (JSDOM environment). E2E browser tests live in `e2e/` (`node` environment with Puppeteer).
+2. **Always rebuild bundles before E2E tests**: Puppeteer loads compiled JavaScript from `dist/bundle.js`. Run `npm run build` prior to running `npm run test:e2e`.
+3. **Handle Puppeteer lifecycle safely**: Ensure `browser.close()` and `page.close()` are called in `afterAll`/`afterEach` blocks to prevent dangling browser processes.
+4. **Never suppress tests**: Do not comment out failing assertions or delete test suites to force a build pass.
+5. **Execute full verification**: Run `npm run test:coverage && npm run test:e2e && npm run lint` to guarantee complete validation before finishing.
