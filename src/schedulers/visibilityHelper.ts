@@ -8,16 +8,16 @@ let visibilityChange: 'visibilitychange' | 'msvisibilitychange' | 'webkitvisibil
 if (typeof document.hidden !== 'undefined') {
 	hidden = 'hidden';
 	visibilityChange = 'visibilitychange';
-} else if (typeof (document as any).msHidden !== 'undefined') {
+} else if (typeof (document as unknown as Record<string, unknown>).msHidden !== 'undefined') {
 	hidden = 'msHidden';
 	visibilityChange = 'msvisibilitychange';
-} else if (typeof (document as any).webkitHidden !== 'undefined') {
+} else if (typeof (document as unknown as Record<string, unknown>).webkitHidden !== 'undefined') {
 	hidden = 'webkitHidden';
 	visibilityChange = 'webkitvisibilitychange';
 }
 
 const isPageVisible = (): boolean => {
-	return !(document as any)[hidden];
+	return !(document as unknown as Record<string, unknown>)[hidden];
 };
 
 /**

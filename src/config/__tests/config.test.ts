@@ -25,7 +25,7 @@ describe('Configuration Merger', () => {
 			subscribers: [() => {}]
 		};
 		const customBaseConfig = Object.assign({}, baseConfig, { subscribers: [function a() {}] });
-		const mergedConfig = mergeConfig(customBaseConfig, extensionConfig);
+		const mergedConfig = mergeConfig(customBaseConfig as unknown as Config, extensionConfig as unknown as Partial<Config>);
 		expect(mergedConfig.subscribers.length).toBe(2);
 		extensionConfig.subscribers.forEach(s => {
 			expect(mergedConfig.subscribers.includes(s)).toBe(true);
@@ -52,7 +52,7 @@ describe('Configuration Merger', () => {
 		};
 		const customBaseConfig = { subscribers: function a() {} };
 
-		const mergedConfig = mergeConfig(customBaseConfig as unknown as Config, extensionConfig as any);
+		const mergedConfig = mergeConfig(customBaseConfig as unknown as Config, extensionConfig as unknown as never);
 		expect(mergedConfig.subscribers.length).toBe(2);
 		const extSubs = Array.isArray(extensionConfig.subscribers) ? extensionConfig.subscribers : [extensionConfig.subscribers];
 		const baseSubs = Array.isArray(customBaseConfig.subscribers) ? customBaseConfig.subscribers : [customBaseConfig.subscribers];

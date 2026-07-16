@@ -19,7 +19,7 @@ describe('Subscribers', () => {
 			const fn = jest.fn();
 
 			expect(manager.use(fn)).toBe(0);
-			expect(manager.use('invalid' as any)).toBeNull();
+			expect(manager.use('invalid' as unknown as Parameters<typeof manager.use>[0])).toBeNull();
 		});
 
 		test('eject should clear subscriber at ID', () => {
@@ -27,10 +27,9 @@ describe('Subscribers', () => {
 			const fn = jest.fn();
 			const id = manager.use(fn);
 
-			if (id !== null) {
-				manager.eject(id);
-				expect(manager.chain[id]).toBeNull();
-			}
+			expect(id).not.toBeNull();
+			manager.eject(id!);
+			expect(manager.chain[id!]).toBeNull();
 		});
 
 		test('dispatch should invoke all registered subscribers with context and data', () => {
@@ -41,7 +40,7 @@ describe('Subscribers', () => {
 			manager.use(sub1);
 			manager.use(sub2);
 
-			const mockContext = { element: {} } as any;
+			const mockContext = { element: {} } as unknown as Parameters<typeof consoleSubscriber>[0];
 			const mockData = { isVisible: true };
 
 			manager.dispatch(mockContext, mockData);
@@ -65,7 +64,7 @@ describe('Subscribers', () => {
 			expect(typeof sub).toBe('function');
 			expect(sub).not.toBe(domSubscriber);
 			expect(sub).not.toBe(consoleSubscriber);
-			expect(() => (sub as any)()).not.toThrow();
+			expect(() => (sub as unknown as () => void)()).not.toThrow();
 		});
 	});
 
@@ -74,7 +73,7 @@ describe('Subscribers', () => {
 			const dreporter = document.getElementById('dreporter');
 			expect(dreporter).not.toBeNull();
 
-			const instance = { element: { id: 'test-node' } } as any;
+			const instance = { element: { id: 'test-node' } } as unknown as Parameters<typeof domSubscriber>[0];
 			const payload = { isVisible: true, surface: 100 };
 
 			domSubscriber(instance, payload);
@@ -88,7 +87,7 @@ describe('Subscribers', () => {
 	describe('consoleSubscriber', () => {
 		test('should log spectator result to console', () => {
 			const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
-			const instance = { element: {} } as any;
+			const instance = { element: {} } as unknown as Parameters<typeof consoleSubscriber>[0];
 			const data = { time: 12345 };
 
 			consoleSubscriber(instance, data);

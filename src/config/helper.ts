@@ -17,8 +17,8 @@ export function mergeConfig(baseConfig: Config, extensionConfig?: Partial<Config
 	const result = Object.assign({}, baseConfig);
 	
 	if (extensionConfig) {
-		const extConfigObj = extensionConfig as Record<string, any>;
-		const baseConfigObj = result as Record<string, any>;
+		const extConfigObj = extensionConfig as Record<string, unknown>;
+		const baseConfigObj = result as unknown as Record<string, unknown>;
 
 		for (const key in extConfigObj) {
 			if (Object.prototype.hasOwnProperty.call(extConfigObj, key)) {

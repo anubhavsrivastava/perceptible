@@ -38,19 +38,19 @@ describe('Schedulers', () => {
 	describe('IntervalScheduler', () => {
 		let spectatorChain: SpectatorManager;
 		let subscriberChain: SubscriberManager;
-		let context: any;
+		let context: never;
 
 		beforeEach(() => {
 			spectatorChain = new SpectatorManager();
 			subscriberChain = new SubscriberManager();
-			context = { element: document.createElement('div') };
+			context = { element: document.createElement('div') } as unknown as never;
 		});
 
 		test('should throw error if spectatorChain or subscriberChain is invalid', () => {
-			expect(() => new IntervalScheduler({ spectatorChain: null as any, subscriberChain, context })).toThrow(
+			expect(() => new IntervalScheduler({ spectatorChain: null as unknown as SpectatorManager, subscriberChain, context })).toThrow(
 				'Not a valid instance of spectatorChain/SubscriberChain'
 			);
-			expect(() => new IntervalScheduler({ spectatorChain, subscriberChain: null as any, context })).toThrow(
+			expect(() => new IntervalScheduler({ spectatorChain, subscriberChain: null as unknown as SubscriberManager, context })).toThrow(
 				'Not a valid instance of spectatorChain/SubscriberChain'
 			);
 		});
@@ -95,7 +95,7 @@ describe('Schedulers', () => {
 
 			jest.advanceTimersByTime(400);
 			expect(runSpy).toHaveBeenCalledTimes(1);
-			expect((scheduler as any)._enabled).toBe(false);
+			expect((scheduler as unknown as { _enabled: boolean })._enabled).toBe(false);
 			expect(scheduler.handleId).toBeUndefined();
 		});
 

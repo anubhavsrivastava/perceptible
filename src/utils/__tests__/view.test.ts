@@ -9,14 +9,14 @@ describe('View Utils', () => {
 	});
 
 	test('getCurrentScrollPosition should return current page offset', () => {
-		(window as any).pageXOffset = 50;
-		(window as any).pageYOffset = 150;
+		(window as unknown as { pageXOffset: number }).pageXOffset = 50;
+		(window as unknown as { pageYOffset: number }).pageYOffset = 150;
 		expect(getCurrentScrollPosition()).toEqual({ left: 50, top: 150 });
 	});
 
 	test('getCurrentViewport should return scroll position and resolution', () => {
-		(window as any).pageXOffset = 10;
-		(window as any).pageYOffset = 20;
+		(window as unknown as { pageXOffset: number }).pageXOffset = 10;
+		(window as unknown as { pageYOffset: number }).pageYOffset = 20;
 		expect(getCurrentViewport()).toEqual({ left: 10, top: 20, width: 1200, height: 800 });
 	});
 
@@ -36,7 +36,7 @@ describe('View Utils', () => {
 			height: 400,
 			right: 400,
 			bottom: 600
-		} as any));
+		} as unknown as DOMRect));
 
 		expect(getElementPosition(mockElem)).toEqual({
 			left: 100,
@@ -47,8 +47,8 @@ describe('View Utils', () => {
 	});
 
 	test('getCurrentViewportElementPosition should combine element rect with window scroll', () => {
-		(window as any).pageXOffset = 25;
-		(window as any).pageYOffset = 75;
+		(window as unknown as { pageXOffset: number }).pageXOffset = 25;
+		(window as unknown as { pageYOffset: number }).pageYOffset = 75;
 
 		const mockElem = document.createElement('div');
 		mockElem.getBoundingClientRect = jest.fn(() => ({
@@ -58,7 +58,7 @@ describe('View Utils', () => {
 			height: 400,
 			right: 400,
 			bottom: 600
-		} as any));
+		} as unknown as DOMRect));
 
 		expect(getCurrentViewportElementPosition(mockElem)).toEqual({
 			left: 125,

@@ -18,9 +18,9 @@ describe('Perceptor Main Engine', () => {
 	});
 
 	test('should throw an error if instantiated without a valid DOM Element', () => {
-		expect(() => new (Perceptor as any)()).toThrow('DOMElement is not a valid HTML Element');
-		expect(() => new (Perceptor as any)({})).toThrow('DOMElement is not a valid HTML Element');
-		expect(() => new (Perceptor as any)('div')).toThrow('DOMElement is not a valid HTML Element');
+		expect(() => new (Perceptor as unknown as new (...args: unknown[]) => Perceptor)()).toThrow('DOMElement is not a valid HTML Element');
+		expect(() => new (Perceptor as unknown as new (...args: unknown[]) => Perceptor)({} as unknown)).toThrow('DOMElement is not a valid HTML Element');
+		expect(() => new (Perceptor as unknown as new (...args: unknown[]) => Perceptor)('div')).toThrow('DOMElement is not a valid HTML Element');
 	});
 
 	test('should initialize Perceptor instance with default configurations and element', () => {

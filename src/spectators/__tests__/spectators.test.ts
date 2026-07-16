@@ -25,7 +25,7 @@ describe('Spectators', () => {
 
 			expect(manager.use(fn1)).toBe(0);
 			expect(manager.use(fn2)).toBe(1);
-			expect(manager.use('not a function' as any)).toBeNull();
+			expect(manager.use('not a function' as unknown as never)).toBeNull();
 		});
 
 		test('eject should clear spectator function at ID', () => {
@@ -33,21 +33,20 @@ describe('Spectators', () => {
 			const fn1 = jest.fn();
 			const id = manager.use(fn1);
 
-			if (id !== null) {
-				manager.eject(id);
-				expect(manager.chain[id]).toBeNull();
-			}
+			expect(id).not.toBeNull();
+			manager.eject(id!);
+			expect(manager.chain[id!]).toBeNull();
 		});
 
 		test('run should execute chain and merge results sequentially', () => {
 			const manager = new SpectatorManager();
 			const s1 = () => ({ a: 1 });
-			const s2 = (ctx: any, curr: any) => ({ b: curr.a + 2 });
+			const s2 = (ctx: unknown, curr: Record<string, number>) => ({ b: curr.a + 2 });
 
-			manager.use(s1 as any);
-			manager.use(s2 as any);
+			manager.use(s1 as unknown as never);
+			manager.use(s2 as unknown as never);
 
-			const result = manager.run({} as any);
+			const result = manager.run({} as unknown as never);
 			expect(result).toEqual({ a: 1, b: 3 });
 			expect(manager.prevResult).toEqual({ a: 1, b: 3 });
 		});
@@ -81,9 +80,9 @@ describe('Spectators', () => {
 				height: 200,
 				right: 300,
 				bottom: 300
-			} as any);
+			} as unknown as never);
 
-			const context = { element, config: { threshold: 100 } } as any;
+			const context = { element, config: { threshold: 100 } } as unknown as never;
 			const result = viewportSpectator(context);
 
 			expect(result.isVisible).toBe(true);
@@ -98,9 +97,9 @@ describe('Spectators', () => {
 				height: 200,
 				right: 100,
 				bottom: 200
-			} as any);
+			} as unknown as never);
 
-			const context = { element, config: { threshold: 50 } } as any;
+			const context = { element, config: { threshold: 50 } } as unknown as never;
 			const result = viewportSpectator(context);
 
 			expect(result.subView!.surface).toBe(50);
@@ -115,7 +114,7 @@ describe('Spectators', () => {
 				height: 100,
 				right: 100,
 				bottom: 100
-			} as any);
+			} as unknown as never);
 
 			const context = {
 				element,
@@ -123,7 +122,7 @@ describe('Spectators', () => {
 					threshold: 100,
 					viewOffset: { top: 50, left: 50, right: 0, bottom: 0 }
 				}
-			} as any;
+			} as unknown as never;
 			const result = viewportSpectator(context);
 
 			expect(result.subView!.surface).toBe(25);
@@ -138,9 +137,9 @@ describe('Spectators', () => {
 				height: 100,
 				right: 2100,
 				bottom: 2100
-			} as any);
+			} as unknown as never);
 
-			const context = { element, config: { threshold: 100 } } as any;
+			const context = { element, config: { threshold: 100 } } as unknown as never;
 			const result = viewportSpectator(context);
 
 			expect(result.isVisible).toBeFalsy();
@@ -149,7 +148,7 @@ describe('Spectators', () => {
 
 	describe('durationSpectator', () => {
 		test('should accumulate duration when visible across consecutive checks', () => {
-			const context = { config: { scheduler: { interval: 500 } } } as any;
+			const context = { config: { scheduler: { interval: 500 } } } as unknown as never;
 			const prevResult = { isVisible: true, duration: 1000 };
 			const currentResult = { isVisible: true };
 
@@ -158,7 +157,7 @@ describe('Spectators', () => {
 		});
 
 		test('should keep duration unchanged when newly hidden or previously hidden', () => {
-			const context = { config: { scheduler: { interval: 500 } } } as any;
+			const context = { config: { scheduler: { interval: 500 } } } as unknown as never;
 			const prevResult = { isVisible: true, duration: 1000 };
 			const currentResult = { isVisible: false };
 
@@ -171,7 +170,7 @@ describe('Spectators', () => {
 		test('should extract element id and tagName', () => {
 			const elem = document.createElement('section');
 			elem.id = 'hero-banner';
-			const result = elementSpectator({ element: elem } as any);
+			const result = elementSpectator({ element: elem } as unknown as never);
 
 			expect(result).toEqual({
 				element: { id: 'hero-banner', tagName: 'SECTION' }
@@ -179,7 +178,7 @@ describe('Spectators', () => {
 		});
 
 		test('should handle empty or missing element gracefully', () => {
-			expect(elementSpectator({} as any)).toEqual({
+			expect(elementSpectator({} as unknown as never)).toEqual({
 				element: { id: undefined, tagName: undefined }
 			});
 		});
@@ -200,7 +199,7 @@ describe('Spectators', () => {
 	describe('layerSpectator', () => {
 		test('should return edge overlapping info using document.elementFromPoint', () => {
 			const element = document.createElement('div');
-			const context = { element } as any;
+			const context = { element } as unknown as never;
 
 			document.elementFromPoint = jest.fn(() => document.body);
 
@@ -216,7 +215,7 @@ describe('Spectators', () => {
 				height: 100,
 				right: 110,
 				bottom: 110
-			} as any);
+			} as unknown as never);
 
 			const currentResult = { subView: { surface: 100 } } as Partial<SpectatorResult>;
 			const result = layerSpectator(context, currentResult);
