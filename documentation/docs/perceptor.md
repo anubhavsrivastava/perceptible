@@ -3,60 +3,43 @@ id: perceptor
 title: Perceptor
 ---
 
-`Perceptor` is basic structure of this library which keeps track of DOM Element. It makes use of [Scheduler](schedulers.md), [Spectators](spectators.md) and [Subscribers](subscribers.md) to watch over an Element for its visibility. `Perceptor` class offers a set of configuration (both global and per instance) to work upon a DOM element. It provides mechanism to enable/disable visibility detection at runtime and also keeps a watch on `click` event on the element.
+`Perceptor` is the core class of this library that tracks visibility of target DOM elements. It coordinates a [Scheduler](schedulers.md), a chain of [Spectators](spectators.md), and [Subscribers](subscribers.md) to evaluate element viewability.
+
+`Perceptor` offers configurable parameters (both global and per instance), runtime control over visibility monitoring via `watch()` and `unwatch()`, and native `click` event handling.
 
 ## Constructor
 
-> constructor(DOMElement, options)
-
--   Params
-
-    -   [DOM Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) - type: DOMElement, _mandatory_
-    -   `options` - type: Object, _Optional_
-
-    You can check `options` object in the [configuration](configuration.md) section.
-
--   Returns
-    -   _Instance of Perceptor_
-
-Usage:
-
 ```javascript
-var advertisementDiv = new Perceptor(document.querySelector('#testdiv'));
+new Perceptor(DOMElement, [options])
 ```
 
-## APIs
+- **`DOMElement`** (`Element`): Mandatory [DOM Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) to observe.
+- **`options`** (`Object`): Optional configuration overrides. See the [Configuration](configuration.md) page for details.
 
-> watch()
+### Usage Example
 
-This API will trigger the instance into watch mode. This is mandatory function to be called to start the instance for detecting viewability.
+```javascript
+var perceptorInstance = new Perceptor(document.querySelector('#testdiv'));
+perceptorInstance.watch();
+```
 
-> unwatch()
+## Instance Methods
 
-This API will disable the Perceptor instance from detecting for viewability.
+### `watch()`
 
-## Properties
+Triggers active observation mode. Must be called to start detecting viewability changes.
 
-> config : _Object_
+### `unwatch()`
 
-The configuration that is applicable to current instance.
+Disables active observation for this instance.
 
-> element : _DOMElement_
+## Instance Properties
 
-The DOM Element under observation.
-
-> event : _function_
-
-Function that is triggered when `element` is clicked
-
-> spectatorChain: _SpectatorManager_
-
-Instance of _SpectatorManager_ for current instance
-
-> subscriberChain: _SubscriberManager_
-
-Instance of _SubscriberManager_ for current instance
-
-> scheduler: _Scheduler_
-
-Instance of _Scheduler_ for current instance
+| Property | Type | Description |
+| :--- | :--- | :--- |
+| `config` | `Object` | Configuration options applicable to this instance. |
+| `element` | `Element` | The target DOM Element under observation. |
+| `event` | `Function` | Callback executed when `element` is clicked. |
+| `spectatorChain` | `SpectatorManager` | `SpectatorManager` instance controlling spectator execution. |
+| `subscriberChain` | `SubscriberManager` | `SubscriberManager` instance handling notifications. |
+| `scheduler` | `Scheduler` | Active `Scheduler` engine triggering evaluation cycles. |

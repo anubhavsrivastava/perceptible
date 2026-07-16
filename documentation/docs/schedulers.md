@@ -5,32 +5,36 @@ title: Scheduler
 
 ![Scheduler](/img/schedulers.png)
 
-Scheduler trigger the `SpecatorManager` to start for collection of visibility data (or additional data) of the Perceptor Instance. Scheduler may run over after regular interval or based on events.
+Schedulers trigger the `SpectatorManager` to execute visibility checks and collect metric data for each `Perceptor` instance. Schedulers can execute periodically or reactively based on user events.
 
-In short, scheduler is mechanism by which viewability of element is calculated at regular interval/event/user activity.
+In short, a scheduler is the engine driving element viewability evaluation over time.
 
-**_NOTE_ : currently only 'interval' mode is available**
+:::info Availability Note
+Currently, the **`interval`** mode is active and fully supported.
+:::
 
-## Page Visibility / Attention Mode
+## Page Visibility & Attention Mode
 
-Page Visibility is considered by Scheduler while triggering spectators. If current tab of the browser is switched over or given webpage is in the background and thus not visible to the user. In such cases, scheduler do not trigger spectator cycle.
+### Page Visibility API Integration
+Page visibility is respected automatically by the scheduler. If the current browser tab is hidden or backgrounded, the scheduler pauses spectator execution cycles to save system resources.
 
-Attention Mode, is additional behavior, where in the scheduler do not trigger the spectator cycle if the window (though visibile on to user) has lost its focus. This behavior is configurable via `AttentionMode` setting.
+### Attention Mode
+Attention Mode is an additional feature that pauses the spectator execution cycle if the browser window loses focus (even if still visible on screen). This behavior can be controlled using the `attentionMode` configuration setting.
 
-## Default Scheduler Mode
+:::tip Media & Video Elements
+If you are observing video, audio, or slideshow elements that should continue tracking even when the browser window loses active focus, set `attentionMode: false`.
+:::
+
+## Scheduler Modes
 
 ### `interval`
-
-In this mode, the scheduler will trigger the spectators after every 'n' ms (specified in `interval` option)
+Triggers spectators periodically based on the configured millisecond duration (e.g. every 500ms).
 
 ### `raf`
-
-In this mode, the scheduler will trigger the spectators by using `requestAnimationFrame` cycles of the browser.
+Triggers spectators synchronized with browser render cycles via `requestAnimationFrame`.
 
 ### `scroll`
-
-In this mode, the scheduler will trigger the spectators only if there is user event in form of 'scroll', 'resize', 'zoom'
+Triggers spectators reactively on user scroll, resize, or zoom events.
 
 ### `observer`
-
-In this mode, `Observer API` are used to trigger the spectators.
+Uses standard web `IntersectionObserver` APIs to trigger evaluation cycles.

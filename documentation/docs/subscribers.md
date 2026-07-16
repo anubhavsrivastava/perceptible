@@ -3,102 +3,94 @@ id: subscribers
 title: Subscribers
 ---
 
+:::tip Live Demo
+Check out the interactive live version [here](pathname:///sample/customSubscriber.html).
+:::
+
 ![Subscribers](/img/subscribers.png)
 
-`Subscribers` are watcher for SpectatorResult for each run. Subscriber are used make meaningful information for the Perceptor result.
+`Subscribers` consume the computed `SpectatorResult` generated at the end of each evaluation cycle tick. They are used for displaying UI debug overlays, triggering state updates, or pushing viewability analytics events to third-party monitoring platforms.
 
-## Default Subscribers
+---
 
-Perceptor comes with default Subscribers. By default `dom` subscriber is used. This can be changed via `defaultSubscriber` option in [configuration](configuration.md)
+## Built-in Subscribers
 
-### domSubscriber
+Perceptible ships with two built-in UI/debug subscribers:
 
-`defaultSubscriber: 'dom'`
-
-This subscriber outputs entire SpectatorResult on bottom-left corner of the browser.
+### 1. `domSubscriber` (`defaultSubscriber: 'dom'`)
+Renders a live HUD (heads-up display) overlay in the bottom-left corner of the browser window showing active visibility percentages, surface measurements, and execution timing.
 
 ![DOMsubscriber](/img/domsubscriber.png)
 
-### consoleSubscriber
-
-`defaultSubscriber: 'dom'`
-
-This subscriber outputs entire SpectatorResult on console of the browser.
+### 2. `consoleSubscriber` (`defaultSubscriber: 'console'`)
+Logs `SpectatorResult` objects continuously to the browser developer console.
 
 ![ConsoleSubscriber](/img/consolesubscriber.png)
 
-## Adding Custom Subscriber
+---
 
-> `SubscriberFunction<PerceptorContext, SpectatorResult> : null`
+## Custom Subscriber Signature
 
-You can add subscriber function by hooking into `subscribers` configuration
+Custom subscriber functions accept two parameters:
 
-### Example
-
-Consider the following HTML structure,
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<style>
-			body {
-				height: 2000px;
-				width: 2500px;
-			}
-			#testdiv {
-				padding: 20px;
-				width: 300px;
-				height: 250px;
-				background: #6c63ff;
-				position: relative;
-				left: 100px;
-				top: 100px;
-			}
-
-			#output {
-				padding: 10px;
-				color: #fff;
-				width: 150px;
-				height: 30px;
-				text-align: center;
-			}
-
-			.float {
-				position: fixed;
-				bottom: 0;
-				right: 0;
-			}
-		</style>
-	</head>
-	<body style="height:2000px;">
-		<div id="testdiv">
-			Element to Track
-		</div>
-		<div id="output" class="float">
-			Visibility Indicator (scroll to check)
-		</div>
-	</body>
-</html>
+```typescript
+type SubscriberFunction = (
+  perceptor: PerceptorInstance,
+  spectatorResult: SpectatorResult
+) => void;
 ```
 
-```html
-<script>
-	var outputContainer = document.getElementById('output');
+---
 
-	var customSubscriber = function(pContext, result) {
-		var surface = result.subView.surface || 0;
-		if (surface < 20) {
-			outputContainer.style.background = 'red';
-		} else if (surface > 20 && surface < 50) {
-			outputContainer.style.background = 'orange';
-		} else if (surface > 50) {
-			outputContainer.style.background = 'green';
-		}
-	};
-	var tObserve = new Perceptor(document.querySelector('#testdiv'), { threshold: 50, defaultSubscriber: 'none', subscribers: [customSubscriber] });
-	tObserve.watch();
-</script>
+## Production Integration Recipes
+
+### Recipe 1: Custom UI Status Indicator
+Dynamically style an element based on surface coverage thresholds:
+
+```javascript
+var statusBadge = document.getElementById('status-badge');
+
+function uiColorSubscriber(perceptor, result) {
+  var surface = result.subView ? result.subView.surface : 0;
+
+  if (surface < 20) {
+    statusBadge.style.background = '#ef4444'; // Red (< 20%)
+  } else if (surface < 50) {
+    statusBadge.style.background = '#f59e0b'; // Amber (20% - 50%)
+  } else {
+    statusBadge.style.background = '#10b981'; // Green (> 50%)
+  }
+}
+
+var tracker = new Perceptor(document.querySelector('#target'), {
+  defaultSubscriber: 'none',
+  subscribers: [uiColorSubscriber],
+});
+tracker.watch();
 ```
 
-Check the live version [here](pathname:///sample/customSubscriber.html)
+### Recipe 2: Google Analytics 4 (GA4) Impression Dispatcher
+Trigger a GA4 `ad_impression` or `view_item` event when an element reaches 100% viewability duration:
+
+```javascript
+var gaFired = false;
+
+function ga4ImpressionSubscriber(perceptor, result) {
+  // Fire event once per pageview when element remains visible for over 1 second (1000ms)
+  if (!gaFired && result.isVisible && result.duration >= 1000) {
+    gaFired = true;
+
+    if (typeof gtag === 'function') {
+      gtag('event', 'ad_impression', {
+        element_id: result.element.id,
+        visible_duration: result.duration,
+      });
+    }
+  }
+}
+
+var adTracker = new Perceptor(document.querySelector('#banner'), {
+  subscribers: [ga4ImpressionSubscriber],
+});
+adTracker.watch();
+```

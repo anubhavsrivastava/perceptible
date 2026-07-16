@@ -3,73 +3,73 @@ id: examplesubscribers
 title: Custom Subscriber
 ---
 
-Following example initialises Multiple Perceptor on `#testdiv`.
-A subscriber displays the visibility in terms of colors. 'Red' for visibility less than 20%, 'Orange' for less than 50% and 'Green' for more than 50%
+:::tip Live Demo
+Check out the interactive live version [here](pathname:///sample/customSubscriber.html).
+:::
 
-Consider the following HTML structure,
+## Primary Use Case
+
+Writing custom subscribers to consume `SpectatorResult` data and update external UI status indicators, trigger state changes, or emit analytics beacons.
+
+---
+
+## Annotated Code Walkthrough
+
+### 1. Target Element & Indicator Bar Setup
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<style>
-			body {
-				height: 2000px;
-				width: 2500px;
-			}
-			#testdiv {
-				padding: 20px;
-				width: 300px;
-				height: 250px;
-				background: #6c63ff;
-				position: relative;
-				left: 100px;
-				top: 100px;
-			}
-
-			#output {
-				padding: 10px;
-				color: #fff;
-				width: 150px;
-				height: 30px;
-				text-align: center;
-			}
-
-			.float {
-				position: fixed;
-				bottom: 0;
-				right: 0;
-			}
+			body { height: 2000px; padding: 20px; }
+			#testdiv { width: 300px; height: 250px; background: #6c63ff; color: #fff; padding: 20px; }
+			#output { position: fixed; bottom: 20px; right: 20px; padding: 10px; color: #fff; text-align: center; border-radius: 6px; }
 		</style>
 	</head>
-	<body style="height:2000px;">
-		<div id="testdiv">
-			Element to Track
-		</div>
-		<div id="output" class="float">
-			Visibility Indicator (scroll to check)
-		</div>
+	<body>
+		<div id="testdiv">Element to Track</div>
+		<div id="output">Visibility Indicator (scroll to test)</div>
 	</body>
 </html>
 ```
 
-```html
-<script>
-	var outputContainer = document.getElementById('output');
+### 2. Custom Subscriber Implementation
 
-	var customSubscriber = function(pContext, result) {
-		var surface = result.subView.surface || 0;
-		if (surface < 20) {
-			outputContainer.style.background = 'red';
-		} else if (surface > 20 && surface < 50) {
-			outputContainer.style.background = 'orange';
-		} else if (surface > 50) {
-			outputContainer.style.background = 'green';
-		}
-	};
-	var tObserve = new Perceptor(document.querySelector('#testdiv'), { threshold: 50, defaultSubscriber: 'none', subscribers: [customSubscriber] });
-	tObserve.watch();
-</script>
+Register a custom subscriber callback in the `subscribers` options array and disable default UI overlays (`defaultSubscriber: 'none'`):
+
+```javascript
+var outputContainer = document.getElementById('output');
+
+// Custom subscriber receiving perceptor context and spectator result
+function customColorSubscriber(perceptorInstance, spectatorResult) {
+  var surfaceCoverage = spectatorResult.subView ? spectatorResult.subView.surface : 0;
+
+  if (surfaceCoverage < 20) {
+    outputContainer.style.background = '#ef4444'; // Red (< 20% visible)
+    outputContainer.textContent = 'Visibility: Low (< 20%)';
+  } else if (surfaceCoverage >= 20 && surfaceCoverage < 50) {
+    outputContainer.style.background = '#f59e0b'; // Amber (20% - 50% visible)
+    outputContainer.textContent = 'Visibility: Medium (20-50%)';
+  } else {
+    outputContainer.style.background = '#10b981'; // Green (> 50% visible)
+    outputContainer.textContent = 'Visibility: High (> 50%)';
+  }
+}
+
+// Instantiate Perceptor with custom subscriber
+var tracker = new Perceptor(document.querySelector('#testdiv'), {
+  threshold: 50,
+  defaultSubscriber: 'none', // Suppress default overlay
+  subscribers: [customColorSubscriber],
+});
+
+tracker.watch();
 ```
 
-Check the live version [here](pathname:///sample/customSubscriber.html)
+---
+
+## Expected Behavior & Interactivity
+
+1. **Dynamic Surface Calculation**: As you scroll `#testdiv` across viewport boundaries, `customColorSubscriber` evaluates surface coverage percentages.
+2. **Real-time Color Switching**: The fixed status bar dynamically switches between **Red** (< 20%), **Amber** (20%-50%), and **Green** (> 50%).

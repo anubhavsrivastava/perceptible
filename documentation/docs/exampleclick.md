@@ -3,54 +3,61 @@ id: exampleclick
 title: Configuration Example - Click Handler
 ---
 
-Following example initialises Perceptor on `#testdiv` elements to watch for visibility. Additionally, `clickHandler` option is used.
+:::tip Live Demo
+Check out the interactive live version [here](pathname:///sample/clicktrack.html).
+:::
+
+## Primary Use Case
+
+Capturing element interaction events (such as ad clicks, banner taps, or card CTA interactions) directly within the `Perceptor` instance context.
+
+---
+
+## Annotated Code Walkthrough
+
+### 1. HTML Markup with Counter Display
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<style>
-			body {
-				height: 2000px;
-				width: 2500px;
-			}
-			#testDiv {
-				width: 300px;
-				height: 250px;
-				color: #fff;
-				padding: 20px;
-				background: #6c63ff;
-				position: relative;
-				left: 100px;
-				top: 100px;
-			}
+			body { height: 2000px; padding: 20px; }
+			#testDiv { width: 300px; height: 250px; background: #6c63ff; color: #fff; padding: 20px; cursor: pointer; }
 		</style>
 	</head>
 	<body>
 		<div id="testDiv">
-			Element To Track
-
-			<br />
-			<span> click count </span>
-			<span id="count">0 </span>
+			Interactive Banner (Click to test handler)
+			<br /><br />
+			Total Clicks: <span id="count">0</span>
 		</div>
 	</body>
 </html>
 ```
 
-The following script will observe the `div#testdiv` DOM Element
+### 2. Click Handler Configuration
 
-```html
-<script>
-	var clickCount = 0;
-	var t1 = new Perceptor(document.querySelector('#testDiv'), {
-		clickHandler: function(e, f) {
-			clickCount++;
-			document.getElementById('count').innerText = clickCount;
-		}
-	});
-	t1.watch();
-</script>
+Pass `clickHandler` in `options` to respond to user clicks on the observed element:
+
+```javascript
+var clickCount = 0;
+var countDisplay = document.getElementById('count');
+
+var tracker = new Perceptor(document.querySelector('#testDiv'), {
+  clickHandler: function (event, perceptorInstance) {
+    clickCount++;
+    countDisplay.textContent = clickCount;
+    console.log('Banner clicked!', { event: event, instance: perceptorInstance });
+  },
+});
+
+tracker.watch();
 ```
 
-Check the live version [here](pathname:///sample/clicktrack.html)
+---
+
+## Expected Behavior & Interactivity
+
+1. **Integrated Tracking**: `Perceptor` attaches a event listener to `#testDiv` upon `.watch()`.
+2. **State Sync**: Clicking anywhere inside `#testDiv` fires the `clickHandler` callback, updating the click counter display and logging click telemetry.

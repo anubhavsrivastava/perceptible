@@ -3,66 +3,73 @@ id: exampleoffset
 title: Configuration Example - Offset
 ---
 
-Following example initialises Perceptor on `#testdiv2` elements to watch for visibility. There is header on the page that is sticky on top. To consider that for viewability, offset of `150` (px, header height) is passed in configuration. If the element is behind the header, it will be reported as non-visible.
+:::tip Live Demo
+Check out the interactive live version [here](pathname:///sample/offset.html).
+:::
+
+## Primary Use Case
+
+Accurately computing element viewability on web pages containing fixed floating headers, sticky navbars, or fixed sidebars. Without view offsets, elements positioned underneath a sticky header would be falsely marked as visible even though they are visually covered.
+
+---
+
+## Annotated Code Walkthrough
+
+### 1. Sticky Navigation Layout Setup
+
+Define a fixed/sticky header (`#header`, height: `150px`) alongside content sections:
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<style>
-			body {
-				height: 2000px;
-				width: 2500px;
-			}
-			#testDiv,
-			#testDiv2 {
-				width: 300px;
-				height: 250px;
-				color: #fff;
-				padding: 20px;
-				background: #6c63ff;
-				position: relative;
-				left: 100px;
-				top: 100px;
-			}
-			#testDiv2 {
-				left: 500px;
-			}
+			body { height: 2000px; padding: 0; margin: 0; }
 			#header {
 				height: 150px;
 				width: 100%;
-				background: black;
+				background: #111827;
 				position: sticky;
 				top: 0;
-				z-index: 10;
+				z-index: 100;
+				color: #fff;
+				padding: 20px;
+			}
+			#testDiv2 {
+				width: 300px;
+				height: 250px;
+				background: #6c63ff;
+				color: #fff;
+				padding: 20px;
+				margin-top: 100px;
 			}
 		</style>
 	</head>
 	<body>
-		<div id="header"></div>
-
-		<div id="testDiv">
-			Element Not Tracked (scroll down)
-		</div>
-		<div id="space" style="height:600px;">
-			Other elements
-		</div>
-		<div id="testDiv2">
-			Element To Track
-		</div>
+		<div id="header">Fixed Navigation Header (Height: 150px)</div>
+		<div id="testDiv2">Target Element Under Observation</div>
 	</body>
 </html>
 ```
 
-The following script will observe the `div#testdiv2` DOM Element
+### 2. Viewport Offset Configuration
 
-```html
-<script>
-	var t = new Perceptor(document.querySelector('#testDiv2'), {
-		viewOffset: { top: 150 } // ideally should be part of global configuration since it is applicable to all elements of the page
-	});
-	t.watch();
-</script>
+Specify `viewOffset.top: 150` to shrink the effective top edge of the evaluation viewport by 150 pixels:
+
+```javascript
+// Initialize Perceptor with top offset compensation
+var tracker = new Perceptor(document.querySelector('#testDiv2'), {
+  viewOffset: {
+    top: 150, // Subtract top 150px of viewport covered by fixed header
+  },
+});
+
+tracker.watch();
 ```
 
-Check the live version [here](pathname:///sample/offset.html)
+---
+
+## Expected Behavior & Interactivity
+
+1. **Occlusion Handling**: When scrolling `#testDiv2` upwards, as soon as it passes under the `150px` sticky header region, the spectator automatically recalculates surface viewability and marks `isVisible: false`.
+2. **Accurate Tracking**: Eliminates false-positive viewability events caused by sticky page elements.
