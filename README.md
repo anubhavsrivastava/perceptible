@@ -43,7 +43,7 @@ Entire documentation is available on [`perceptible.netlify.com`](https://percept
 
 ## Development
 
-For modernizing this codebase to Node 22, Vite, and Docusaurus v3, see the step-by-step task breakdown in [MIGRATION_TASKS.md](file:///Users/anubhav/Developer/perceptible/MIGRATION_TASKS.md).
+For modernizing this codebase to Node 24, Vite, and Docusaurus v3, see the step-by-step task breakdown in [MIGRATION_TASKS.md](file:///Users/anubhav/Developer/perceptible/MIGRATION_TASKS.md).
 
 You may need to do `npm install` to get dependencies and `npm run build` to build latest bundle from Vite.
 View the sample using `npm run sample`

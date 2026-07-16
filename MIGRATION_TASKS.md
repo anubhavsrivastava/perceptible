@@ -1,6 +1,6 @@
 # Perceptible Modernization Roadmap & Task Breakdown
 
-This document serves as an actionable, step-by-step guide for modernizing the **Perceptible** codebase, build pipeline, testing framework, CI/CD, and documentation tooling to **Node 22+** and modern ecosystem standards.
+This document serves as an actionable, step-by-step guide for modernizing the **Perceptible** codebase, build pipeline, testing framework, CI/CD, and documentation tooling to **Node 24+** and modern ecosystem standards.
 
 Tasks are modularized so they can be picked up independently by different contributors.
 
@@ -23,18 +23,18 @@ Tasks are modularized so they can be picked up independently by different contri
 ## 🛠 Task Details
 
 ### TASK-1: Core & Bundling - Package & Vite Alignment
-**Goal:** Transition build pipeline from Webpack 4 to Vite 5+ targeting Node 22.
+**Goal:** Transition build pipeline from Webpack 4 to Vite 5+ targeting Node 24.
 
 * **Steps to Execute:**
-  1. Verify `package.json` contains `"engines": { "node": ">=22.0.0" }`.
-  2. Run `npm install` on Node 22 to generate a fresh `package-lock.json`.
+  1. Verify `package.json` contains `"engines": { "node": ">=24.0.0" }`.
+  2. Run `npm install` on Node 24 to generate a fresh `package-lock.json`.
   3. Verify `vite.config.js` builds UMD (`Perceptor`) and ESM bundles into `dist/`.
   4. Run `npm run build` and confirm outputs exist:
      - `dist/bundle.js`
      - `dist/bundle.mjs` (or UMD fallback)
 * **Verification Command:**
   ```bash
-  node -v # Ensure Node >= 22
+  node -v # Ensure Node >= 24
   npm install
   npm run build
   ```
@@ -73,7 +73,7 @@ Tasks are modularized so they can be picked up independently by different contri
 ---
 
 ### TASK-4: Testing - Jest Upgrade & Test Suite Modernization
-**Goal:** Upgrade Jest to v29+ and ensure all unit tests pass seamlessly under Node 22.
+**Goal:** Upgrade Jest to v29+ and ensure all unit tests pass seamlessly under Node 24.
 
 * **Steps to Execute:**
   1. Review and update `jest.config.js` to ensure compatibility with ESM / modern JSDOM environments.
@@ -92,7 +92,7 @@ Tasks are modularized so they can be picked up independently by different contri
 
 * **Steps to Execute:**
   1. Create file `.github/workflows/ci.yml`.
-  2. Configure workflow matrix targeting Node 22.x on `ubuntu-latest`.
+  2. Configure workflow matrix targeting Node 24.x on `ubuntu-latest`.
   3. Steps should include:
      - `actions/checkout@v4`
      - `actions/setup-node@v4` with Node 22 and caching.
