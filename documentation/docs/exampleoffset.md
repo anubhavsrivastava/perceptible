@@ -65,4 +65,4 @@ The following script will observe the `div#testdiv2` DOM Element
 </script>
 ```
 
-Check the live version [here](/sample/offset)
+Check the live version [here](pathname:///sample/offset.html)

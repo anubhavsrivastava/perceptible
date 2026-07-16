@@ -72,4 +72,4 @@ Consider the following HTML structure,
 </script>
 ```
 
-Check the live version [here](/sample/customSubscriber)
+Check the live version [here](pathname:///sample/customSubscriber.html)

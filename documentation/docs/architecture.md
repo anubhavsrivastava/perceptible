@@ -17,7 +17,7 @@ Each DOM Element that has to be observed for visibility has a corresponding Perc
 
 `unwatch()` API in each Perceptor instance asks the scheduler to stop watching for visibility changes.
 
-Check the live version [here](/sample/unwatch)
+Check the live version [here](pathname:///sample/unwatch.html)
 
 ## Scheduler
 

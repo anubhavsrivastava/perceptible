@@ -22,7 +22,6 @@
 
 			#output {
 				padding: 10px;
-				background-color: green;
 				color: #fff;
 				width: 150px;
 				height: 30px;
@@ -41,26 +40,25 @@
 			Element to Track
 		</div>
 		<div id="output" class="float">
-			Click here to toggle watch mode
+			Visibility Indicator (scroll to check)
 		</div>
 	</body>
 
-	<script src="..\dist\bundle.js"></script>
+	<script src="../dist/bundle.js"></script>
 	<script>
 		var outputContainer = document.getElementById('output');
-		var watchMode = true;
-		var tObserve = new Perceptor(document.querySelector('#testdiv'), { threshold: 50, defaultSubscriber: 'dom' });
-		tObserve.watch();
-		outputContainer.addEventListener('click', () => {
-			if (watchMode) {
+
+		var customSubscriber = function(pContext, result) {
+			var surface = result.subView.surface || 0;
+			if (surface < 20) {
 				outputContainer.style.background = 'red';
-				tObserve.unwatch();
-				watchMode = false;
-			} else {
+			} else if (surface > 20 && surface < 50) {
+				outputContainer.style.background = 'orange';
+			} else if (surface > 50) {
 				outputContainer.style.background = 'green';
-				tObserve.watch();
-				watchMode = true;
 			}
-		});
+		};
+		var tObserve = new Perceptor(document.querySelector('#testdiv'), { threshold: 50, defaultSubscriber: 'none', subscribers: [customSubscriber] });
+		tObserve.watch();
 	</script>
 </html>

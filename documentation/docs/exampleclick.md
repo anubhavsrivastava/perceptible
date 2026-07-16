@@ -53,4 +53,4 @@ The following script will observe the `div#testdiv` DOM Element
 </script>
 ```
 
-Check the live version [here](/sample/clicktrack)
+Check the live version [here](pathname:///sample/clicktrack.html)

@@ -33,4 +33,4 @@ You can ask Perceptor to stop watching by, (from above example)
 tObserve.unwatch();
 ```
 
-Check the live version [here](/sample/basicExample)
+Check the live version [here](pathname:///sample/basicExample.html)

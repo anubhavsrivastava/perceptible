@@ -73,4 +73,4 @@ The following script will observe the `div#testdiv` DOM Element
 </script>
 ```
 
-Check the live version [here](/sample/unwatch)
+Check the live version [here](pathname:///sample/unwatch.html)

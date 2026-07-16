@@ -29,7 +29,7 @@ This subscriber outputs entire SpectatorResult on console of the browser.
 
 ## Adding Custom Subscriber
 
-> SubscriberFunction<PerceptorContext, SpectatorResult> : null
+> `SubscriberFunction<PerceptorContext, SpectatorResult> : null`
 
 You can add subscriber function by hooking into `subscribers` configuration
 
@@ -101,4 +101,4 @@ Consider the following HTML structure,
 </script>
 ```
 
-Check the live version [here](/sample/customSubscriber)
+Check the live version [here](pathname:///sample/customSubscriber.html)

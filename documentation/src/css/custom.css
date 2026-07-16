@@ -1,0 +1,45 @@
+/**
+ * Custom CSS for Perceptible Documentation Site
+ */
+
+:root {
+  --ifm-color-primary: #6c63ff;
+  --ifm-color-primary-dark: #5146ff;
+  --ifm-color-primary-darker: #4336ff;
+  --ifm-color-primary-darkest: #1a0aff;
+  --ifm-color-primary-light: #8780ff;
+  --ifm-color-primary-lighter: #9590ff;
+  --ifm-color-primary-lightest: #bebbff;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #8780ff;
+  --ifm-color-primary-dark: #6c63ff;
+  --ifm-color-primary-darker: #5e54ff;
+  --ifm-color-primary-darkest: #3427ff;
+  --ifm-color-primary-light: #a09aff;
+  --ifm-color-primary-lighter: #ada7ff;
+  --ifm-color-primary-lightest: #d4d1ff;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+.hero--primary {
+  background-color: var(--ifm-color-primary);
+  background-image: linear-gradient(135deg, #6c63ff 0%, #3a32a8 100%);
+  color: #ffffff;
+}
+
+.featureCard {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  padding: 1.5rem;
+  height: 100%;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.featureCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}

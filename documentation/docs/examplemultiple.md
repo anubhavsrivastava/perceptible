@@ -55,4 +55,4 @@ The following script will observe the `div#testdiv` DOM Element
 </script>
 ```
 
-Check the live version [here](/sample/multiple)
+Check the live version [here](pathname:///sample/multiple.html)

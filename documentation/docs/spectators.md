@@ -9,7 +9,7 @@ title: Spectators
 
 Spectators are chain of function that are executed with `currentResult` object. Each Spectator in the chain adds relevant data to currentResult so that sufficient information about viewability/visibility of DOM Element can be interpreted. Each Spectator is called with `(PerceptorContext, currentResult, previosRunResult)`, based on this information, spectators can add relevant info.
 
-> SpectatorFunction<PerceptorContext, currentResult, previosRunResult> : currentResult
+> `SpectatorFunction<PerceptorContext, currentResult, previosRunResult> : currentResult`
 
 ## DefaultSpectators
 
@@ -135,4 +135,4 @@ Consider the following HTML structure,
 
 Similarly for Video elements with Player in Player option (just like youtube), such custom spectators can be handy.
 
-Check the live version [here](/sample/customSpectator)
+Check the live version [here](pathname:///sample/customSpectator.html)

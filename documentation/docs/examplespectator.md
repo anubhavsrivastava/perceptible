@@ -71,4 +71,4 @@ If `float` CSS class is present in child DOM, it should be reported as visibile.
 
 Similarly for Video elements with Player in Player option (just like youtube), such custom spectators can be handy.
 
-Check the live version [here](/sample/customSpectator)
+Check the live version [here](pathname:///sample/customSpectator.html)
