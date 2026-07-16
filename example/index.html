@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perceptible NPM Module Example Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="navbar">
+        <div class="brand">
+          <div class="logo">P</div>
+          <span class="brand-title">Perceptible <span class="badge">NPM Module Demo</span></span>
+        </div>
+        <div class="nav-links">
+          <a href="https://github.com/anubhavsrivastava/perceptible" target="_blank" rel="noreferrer" class="btn-github">GitHub Repository</a>
+        </div>
+      </header>
+
+      <div class="hero-section">
+        <h1>Real-time Element Viewability Tracking</h1>
+        <p>Scroll down to inspect active telemetry surface measurements, tab focus switches, and duration tracking powered by <code>perceptible</code> npm module.</p>
+      </div>
+
+      <main class="content-container">
+        <!-- Target Element 1: Banner Ad Card -->
+        <section id="ad-banner-card" class="card trackable-card">
+          <div class="card-header">
+            <span class="card-tag">Target 1 &bull; Ad Impression Tracking</span>
+            <h3>MRC Standard Ad Banner (50% Threshold)</h3>
+          </div>
+          <div class="card-body">
+            <p>Monitors 50%+ viewport intersection area for ad viewability compliance. Click this card to test click interaction telemetry.</p>
+            <div class="interaction-prompt">Click me to register interaction</div>
+          </div>
+        </section>
+
+        <!-- Spacer to test scroll viewability -->
+        <div class="scroll-spacer">
+          <div class="scroll-indicator">
+            <span>&darr; Scroll down to bring Target 2 into viewport &darr;</span>
+          </div>
+        </div>
+
+        <!-- Target Element 2: Engagement Content Card -->
+        <section id="engagement-card" class="card trackable-card">
+          <div class="card-header">
+            <span class="card-tag">Target 2 &bull; Media & Article Engagement</span>
+            <h3>Content Exposure & Duration Card</h3>
+          </div>
+          <div class="card-body">
+            <p>Calculates precise cumulative exposure duration while this card is present in the active visible viewport and window focus is active.</p>
+          </div>
+        </section>
+
+        <div class="scroll-spacer"></div>
+
+        <!-- Target Element 3: Footer Callout -->
+        <section id="footer-callout" class="card trackable-card">
+          <div class="card-header">
+            <span class="card-tag">Target 3 &bull; Lazy Trigger</span>
+            <h3>Footer Conversion Callout</h3>
+          </div>
+          <div class="card-body">
+            <p>Triggers analytics telemetry when 100% surface area enters view bounds at the bottom of the page.</p>
+          </div>
+        </section>
+      </main>
+
+      <!-- Live Floating Telemetry Dashboard -->
+      <aside class="telemetry-panel">
+        <div class="panel-header">
+          <h2>Telemetry Monitor</h2>
+          <span id="attention-status" class="status-badge active">Window Focused</span>
+        </div>
+
+        <div class="metrics-grid">
+          <!-- Card 1 Metrics -->
+          <div class="metric-card">
+            <div class="metric-title">Target 1: Ad Banner</div>
+            <div class="metric-row">
+              <span>Visibility:</span>
+              <span id="target1-visibility" class="pill pill-offline">Hidden</span>
+            </div>
+            <div class="metric-row">
+              <span>Surface Area:</span>
+              <span id="target1-surface" class="metric-value">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div id="target1-progress" class="progress-bar-fill" style="width: 0%"></div>
+            </div>
+            <div class="metric-row">
+              <span>Duration:</span>
+              <span id="target1-duration" class="metric-value">0.0s</span>
+            </div>
+            <div class="metric-row">
+              <span>Clicks:</span>
+              <span id="target1-clicks" class="metric-value">0</span>
+            </div>
+          </div>
+
+          <!-- Card 2 Metrics -->
+          <div class="metric-card">
+            <div class="metric-title">Target 2: Engagement Card</div>
+            <div class="metric-row">
+              <span>Visibility:</span>
+              <span id="target2-visibility" class="pill pill-offline">Hidden</span>
+            </div>
+            <div class="metric-row">
+              <span>Surface Area:</span>
+              <span id="target2-surface" class="metric-value">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+              <div id="target2-progress" class="progress-bar-fill" style="width: 0%"></div>
+            </div>
+            <div class="metric-row">
+              <span>Duration:</span>
+              <span id="target2-duration" class="metric-value">0.0s</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

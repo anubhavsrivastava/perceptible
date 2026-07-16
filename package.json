@@ -7,8 +7,8 @@
 	"types": "src/index.d.ts",
 	"exports": {
 		".": {
-			"import": "./dist/bundle.js",
-			"require": "./dist/bundle.umd.cjs"
+			"import": "./dist/bundle.mjs",
+			"require": "./dist/bundle.js"
 		}
 	},
 	"engines": {
