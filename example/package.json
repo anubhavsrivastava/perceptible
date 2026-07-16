@@ -12,6 +12,6 @@
     "perceptible": "^0.9.0"
   },
   "devDependencies": {
-    "vite": "^5.0.0"
+    "vite": "^8.1.5"
   }
 }
