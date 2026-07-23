@@ -40,7 +40,7 @@ View the sample using `npm run sample`
 
 ## Documentation
 
-Full documentation is built with Docusaurus and available under the [`documentation`](documentation/docs) directory or hosted online at [`perceptible.netlify.app`](https://perceptible.netlify.app/).
+Full documentation is built with Docusaurus and available under the [`documentation`](documentation/docs) directory or hosted online at [`perceptible.js.org`](https://perceptible.js.org/).
 
 
 ## Usage with Packages (Example App)
