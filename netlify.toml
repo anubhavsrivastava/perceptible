@@ -1,5 +1,5 @@
 [build]
-  command = "cd documentation && npm install && npm run build"
+  command = "cd documentation && npm install --legacy-peer-deps && npm run build"
   publish = "documentation/build"
 
 [build.environment]
