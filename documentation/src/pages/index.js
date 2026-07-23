@@ -18,6 +18,9 @@ function HomepageHeader() {
         />
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className="hero__subtitle" >
+          <Link href="/sample/multiple.html" target="_blank" className="button   button--lg">✨ See it in action with our Live Interactive Sample ✨</Link>
+        </p>
         <div style={{ margin: '2rem 0' }}>
           <Link
             className="button button--secondary button--lg"
@@ -29,12 +32,6 @@ function HomepageHeader() {
             className="button button--outline button--light button--lg"
             to="/docs/examplemain">
             View Examples 💡
-          </Link>
-          <Link
-            className="button button--outline button--light button--lg"
-            style={{ marginLeft: '1rem' }}
-            to="/sample/">
-            Live Sample 🧪
           </Link>
         </div>
         <div className="row" style={{ marginTop: '3rem' }}>
