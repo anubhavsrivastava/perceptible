@@ -12,6 +12,8 @@
 
 Zero-dependency JavaScript library for high-performance DOM element viewability and visibility tracking.
 
+> **Note:** Version 1 is purely in JavaScript, while version 2 supports TypeScript.
+
 Perceptible monitors DOM elements in real time as users scroll and interact. It measures exact surface area coverage relative to the browser viewport while handling tab visibility, window focus events (`attentionMode`), and visibility duration.
 
 Perceptible can be used to detect viewability of any DOM element that the user is currently looking at. A Element may be part of the page but not under current viewport (due to user scroll), perceptible helps to calculate viewability for such elements for analytics and other purpose.
@@ -156,14 +158,6 @@ npm run lint
 
 ---
 
-## Roadmap
-
-- [x] Extensible core framework with default Spectators & Subscribers
-- [x] Docusaurus documentation portal with live examples
-- [x] Unit Test Suite powered by Jest & JSDOM (`npm run test`)
-- [x] Puppeteer automated browser testing (`npm run test:e2e`)
-
----
 
 ## Contribution
 
