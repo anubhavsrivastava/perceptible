@@ -7,7 +7,7 @@ const config = {
   tagline: 'Detect visibility of DOM elements seamlessly',
   favicon: 'img/favicon.ico',
 
-  url: 'https://perceptible.netlify.com',
+  url: 'https://perceptible.js.org',
   baseUrl: '/',
 
   organizationName: 'anubhavsrivastava',
