@@ -30,6 +30,12 @@ function HomepageHeader() {
             to="/docs/examplemain">
             View Examples 💡
           </Link>
+          <Link
+            className="button button--outline button--light button--lg"
+            style={{ marginLeft: '1rem' }}
+            to="/sample/">
+            Live Sample 🧪
+          </Link>
         </div>
         <div className="row" style={{ marginTop: '3rem' }}>
           {FeatureList.map((props, idx) => (
